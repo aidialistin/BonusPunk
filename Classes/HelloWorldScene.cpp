@@ -28,7 +28,7 @@
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
-{
+{ //lksdjksajföfökdjsfh
     return HelloWorld::create();
 }
 
