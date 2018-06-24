@@ -26,13 +26,18 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "CountDown.hpp"
+#include <string>
+using namespace std;
 
 class HelloWorld : public cocos2d::Scene
 {
 public:
+    cocos2d::Label* labelTime;
     static cocos2d::Scene* createScene();
-
+    
     virtual bool init();
+    virtual void update(float dt);
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
