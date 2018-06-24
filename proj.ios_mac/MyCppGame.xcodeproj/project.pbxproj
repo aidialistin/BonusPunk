@@ -40,6 +40,8 @@
 		521A8EAA19F11F5000D177D7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 521A8EA819F11F5000D177D7 /* fonts */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
+		BDA5C7F420E00FFA0035A4C1 /* CountDown.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */; };
+		BDA5C7F520E00FFA0035A4C1 /* CountDown.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */; };
 		BDBC7E0D20DFE37A00B29CE2 /* close24.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBC7E0C20DFE37A00B29CE2 /* close24.png */; };
 		BDBC7E0E20DFE37A00B29CE2 /* close24.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBC7E0C20DFE37A00B29CE2 /* close24.png */; };
 		BDBC7E1820DFE75700B29CE2 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBC7E1720DFE75700B29CE2 /* close.png */; };
@@ -128,6 +130,8 @@
 		521A8EA819F11F5000D177D7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CountDown.cpp; sourceTree = "<group>"; };
+		BDA5C7F320E00FFA0035A4C1 /* CountDown.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CountDown.hpp; sourceTree = "<group>"; };
 		BDBC7E0C20DFE37A00B29CE2 /* close24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close24.png; sourceTree = "<group>"; };
 		BDBC7E1720DFE75700B29CE2 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -277,6 +281,8 @@
 		46880B8319C43A87006E1F66 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */,
+				BDA5C7F320E00FFA0035A4C1 /* CountDown.hpp */,
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
@@ -438,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
+				BDA5C7F420E00FFA0035A4C1 /* CountDown.cpp in Sources */,
 				1AF87B8B1F6F782A007BE51C /* RootViewController.mm in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
@@ -452,6 +459,7 @@
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
+				BDA5C7F520E00FFA0035A4C1 /* CountDown.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

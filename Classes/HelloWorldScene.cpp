@@ -52,10 +52,9 @@ bool HelloWorld::init()
     {
         return false;
     }
-<<<<<<< HEAD
     auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
     this->addChild(bGColor);
-=======
+
     
     labelTime = Label::createWithTTF(countDown->timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
@@ -70,12 +69,12 @@ bool HelloWorld::init()
         // add the label as a child to this layer
         this->addChild(labelTime, 1);
     }
->>>>>>> dba7b7cab342bd95e1fd35e03e9f0d8a5e0317fb
+
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-<<<<<<< HEAD
+
   //  mySprite = Sprite::create("close24.png");
     
   //  mySprite->setPosition(Point((visibleSize.width-20) + origin.x, (visibleSize.height-20) + origin.y));
@@ -102,8 +101,6 @@ bool HelloWorld::init()
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
 
-=======
->>>>>>> dba7b7cab342bd95e1fd35e03e9f0d8a5e0317fb
     // add a "close" icon to exit the progress. it's an autorelease object
     auto closeItem = MenuItemImage::create("close.png", "close.png",CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
 
@@ -130,7 +127,7 @@ bool HelloWorld::init()
     /////////////////////////////
     // 3. add your codes below...
 
-<<<<<<< HEAD
+
     // add a label shows "Hello World"
     // create and initialize a label
 
@@ -167,11 +164,11 @@ void HelloWorld::levelDrei(cocos2d::Ref *pSender)
     CCLOG("Level3");
 }
 void HelloWorld::levelEins(cocos2d::Ref *pSender)
-{
-    CCLOG("Level1");
-=======
+{ CCLOG("Level1");}
+
+
     // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
+/*    auto sprite = Sprite::create("HelloWorld.png");
     if (sprite == nullptr)
     {
         problemLoading("'HelloWorld.png'");
@@ -183,13 +180,13 @@ void HelloWorld::levelEins(cocos2d::Ref *pSender)
 
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
-    }
+    }*/
 
     //this->schedule(SEL_SCHEDULE(&CountDown::update), 1.0f);
-    this->schedule(CC_SCHEDULE_SELECTOR(HelloWorld::update), 1.0f);
-    return true;
->>>>>>> dba7b7cab342bd95e1fd35e03e9f0d8a5e0317fb
-}
+ //   this->schedule(CC_SCHEDULE_SELECTOR(HelloWorld::update), 1.0f);
+   // return true;
+
+//}
 
 void HelloWorld::update(float dt){
     countDown->update(dt);
