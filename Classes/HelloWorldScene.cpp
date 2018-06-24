@@ -24,11 +24,16 @@
 
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
+#include "CountDown.hpp"
+#include <string>
+using namespace std;
 
 USING_NS_CC;
 
+CountDown* countDown = new CountDown();
+
 Scene* HelloWorld::createScene()
-{ //lksdjksajföfökdjsfh
+{
     return HelloWorld::create();
 }
 
@@ -48,13 +53,23 @@ bool HelloWorld::init()
     {
         return false;
     }
-
+    
+    labelTime = Label::createWithTTF(countDown->timer, "fonts/arial.ttf", 24);
+    if (labelTime == nullptr)
+    {
+        problemLoading("'fonts/arial.ttf'");
+    }
+    else
+    {
+        // position the label on the center of the screen
+        labelTime->setPosition(Vec2(100, 300));
+        
+        // add the label as a child to this layer
+        this->addChild(labelTime, 1);
+    }
+    
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
 
     // add a "close" icon to exit the progress. it's an autorelease object
     auto closeItem = MenuItemImage::create(
@@ -83,24 +98,6 @@ bool HelloWorld::init()
     /////////////////////////////
     // 3. add your codes below...
 
-    // add a label shows "Hello World"
-    // create and initialize a label
-
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
-
-        // add the label as a child to this layer
-        this->addChild(label, 1);
-    }
-
     // add "HelloWorld" splash screen"
     auto sprite = Sprite::create("HelloWorld.png");
     if (sprite == nullptr)
@@ -115,9 +112,16 @@ bool HelloWorld::init()
         // add the sprite as a child to this layer
         this->addChild(sprite, 0);
     }
+
+    //this->schedule(SEL_SCHEDULE(&CountDown::update), 1.0f);
+    this->schedule(CC_SCHEDULE_SELECTOR(HelloWorld::update), 1.0f);
     return true;
 }
 
+void HelloWorld::update(float dt){
+    countDown->update(dt);
+    labelTime->setString(countDown->timer);
+}
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
