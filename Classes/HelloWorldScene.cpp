@@ -28,7 +28,7 @@
 USING_NS_CC;
 
 Scene* HelloWorld::createScene()
-{ //lksdjksajföfökdjsfh
+{
     return HelloWorld::create();
 }
 
@@ -41,44 +41,66 @@ static void problemLoading(const char* filename)
 
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
-{
-    //////////////////////////////
+{    //////////////////////////////
     // 1. super init first
     if ( !Scene::init() )
     {
         return false;
     }
-
+    auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
+    this->addChild(bGColor);
+    
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+  //  mySprite = Sprite::create("close24.png");
+    
+  //  mySprite->setPosition(Point((visibleSize.width-20) + origin.x, (visibleSize.height-20) + origin.y));
+    
+  //  this->addChild(mySprite);
+    auto start = Label::createWithSystemFont("Start", "Arial", 30.0);
+    auto level1 = Label::createWithSystemFont("Level1", "Arial", 20.0);
+    auto level2 = Label::createWithSystemFont("Level2", "Arial", 20.0);
+    auto level3 = Label::createWithSystemFont("Level3", "Arial", 20.0);
+    auto startMenuItem = MenuItemLabel::create(start, CC_CALLBACK_1(HelloWorld::Play, this));
+    auto level2MenuItem = MenuItemLabel::create(level2, CC_CALLBACK_1(HelloWorld::levelAdd, this));
+    auto level3MenuItem = MenuItemLabel::create(level3, CC_CALLBACK_1(HelloWorld::levelDrei, this));
+    auto level4MenuItem = MenuItemLabel::create(level1, CC_CALLBACK_1(HelloWorld::levelEins, this));
+    
+    startMenuItem ->setPosition(Point(visibleSize.width / 2, (visibleSize.height / 4-10) * 3));
+    level2MenuItem->setPosition(Point(visibleSize.width / 2 , (visibleSize.height / 2)));
+    level3MenuItem->setPosition(Point(visibleSize.width / 2 + 100, (visibleSize.height / 2)));
+    level4MenuItem ->setPosition(Point(visibleSize.width / 2-100 , (visibleSize.height / 2)));
+
+
+   
+    
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
 
     // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+    auto closeItem = MenuItemImage::create("close.png", "close.png",CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
 
     if (closeItem == nullptr ||
         closeItem->getContentSize().width <= 0 ||
         closeItem->getContentSize().height <= 0)
     {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
+        problemLoading("'close24.png' and 'close36.png'");
     }
     else
     {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
-        float y = origin.y + closeItem->getContentSize().height/2;
-        closeItem->setPosition(Vec2(x,y));
+        float xPosCloseItem = origin.x + visibleSize.width/2 - closeItem->getContentSize().width/2 +10;
+        float yPosCloseItem = origin.y + closeItem->getContentSize().height;
+        closeItem->setPosition(Vec2(xPosCloseItem,yPosCloseItem));
     }
 
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
+    auto *menu = Menu::create(startMenuItem,level4MenuItem , level2MenuItem, level3MenuItem,closeItem, NULL);
+    menu->setPosition(Point(0, 0));
+  
+    
+
+    this->addChild(menu);
 
     /////////////////////////////
     // 3. add your codes below...
@@ -86,10 +108,11 @@ bool HelloWorld::init()
     // add a label shows "Hello World"
     // create and initialize a label
 
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF("B O N U S", "fonts/arial.ttf", 34);
+    label->setColor(Color3B(117, 209, 234));
     if (label == nullptr)
     {
-        problemLoading("'fonts/Marker Felt.ttf'");
+        problemLoading("'fonts/arial.ttf'");
     }
     else
     {
@@ -100,22 +123,26 @@ bool HelloWorld::init()
         // add the label as a child to this layer
         this->addChild(label, 1);
     }
-
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
     return true;
+    
+}
+void HelloWorld::Play(cocos2d::Ref *pSender)
+{
+    CCLOG("Play");
+}
+
+void HelloWorld::levelAdd(cocos2d::Ref *pSender)
+{
+    CCLOG("level2");
+}
+
+void HelloWorld::levelDrei(cocos2d::Ref *pSender)
+{
+    CCLOG("Level3");
+}
+void HelloWorld::levelEins(cocos2d::Ref *pSender)
+{
+    CCLOG("Level1");
 }
 
 
@@ -135,3 +162,6 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 
 }
+
+
+
