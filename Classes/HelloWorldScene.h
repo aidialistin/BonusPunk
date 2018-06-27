@@ -33,11 +33,11 @@ using namespace std;
 class HelloWorld : public cocos2d::Scene
 {
 public:
-    cocos2d::Label* labelTime;
+
     static cocos2d::Scene* createScene();
     
     virtual bool init();
-    virtual void update(float dt);
+
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
@@ -49,7 +49,7 @@ public:
     void Play(Ref *pSender);
     void levelAdd(Ref *pSender);
     void levelDrei(Ref *pSender);
-     void levelEins(Ref *pSender);
+    void levelEins(Ref *pSender);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
