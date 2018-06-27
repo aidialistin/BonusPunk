@@ -44,6 +44,12 @@ public:
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+    cocos2d::Sprite *mySprite;
+    
+    void Play(Ref *pSender);
+    void levelAdd(Ref *pSender);
+    void levelDrei(Ref *pSender);
+     void levelEins(Ref *pSender);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
