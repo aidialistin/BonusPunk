@@ -67,7 +67,7 @@ bool HelloWorld::init()
         labelTime->setPosition(Vec2(100, 300));
         
         // add the label as a child to this layer
-        this->addChild(labelTime, 1);
+        this->addChild(labelTime, 2);
     }
 
     
