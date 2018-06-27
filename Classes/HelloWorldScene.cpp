@@ -121,7 +121,7 @@ bool HelloWorld::init()
     menu->setPosition(Point(0, 0));
   
     
-
+    this->schedule(CC_SCHEDULE_SELECTOR(HelloWorld::update), 1.0f);
     this->addChild(menu);
 
     /////////////////////////////
