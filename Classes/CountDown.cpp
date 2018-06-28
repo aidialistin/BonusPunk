@@ -7,11 +7,13 @@
 
 #include "CountDown.hpp"
 #include "SimpleAudioEngine.h"
+#include "GameOver.hpp"
+
 
 using namespace std;
 
 CountDown::CountDown(){
-    timeRemaining = 300;
+    timeRemaining = 5;
     min = ceil(timeRemaining / 60);
     sec = timeRemaining % 60;
     if (sec < 10){
@@ -35,7 +37,8 @@ void CountDown::update(float dt) {
         }
         
         if (timeRemaining <= 0.f) {
-           //Game Over: go to next scene
+            auto scene = GameOver::createScene();
+            cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionCrossFade::create(0.5, scene));
         }
     }
 }
