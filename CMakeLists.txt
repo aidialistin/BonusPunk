@@ -63,7 +63,7 @@ list(APPEND GAME_SOURCE
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
 	 Classes/CountDown.hpp
-	 Classes/GameOverScene.hpp
+	 Classes/GameOver.hpp
      Classes/HelloWorldScene.h
 	 Classes/LevelScene.hpp
      )

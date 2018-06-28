@@ -56,7 +56,7 @@ bool HelloWorld::init()
     this->addChild(bGColor);
 
     
-<<<<<<< HEAD
+//<<<<<<< HEAD
     labelTime = Label::createWithTTF(countDown->timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
     {
@@ -72,8 +72,9 @@ bool HelloWorld::init()
     }
 
     
-=======
->>>>>>> 64de8168b4f5e61bf86b5af27321235dffc7b2f3
+//=======
+//>>>>>>> 64de8168b4f5e61bf86b5af27321235dffc7b2f3
+
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
