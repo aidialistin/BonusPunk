@@ -8,6 +8,7 @@
 #include "LevelScene.hpp"
 #include "CountDown.hpp"
 
+
 CountDown* countDown = new CountDown();
 
 LevelScene::LevelScene(void)
@@ -26,7 +27,6 @@ static void problemLoading(const char* filename)
 }
 
 Scene* LevelScene::createScene() {
-    
     auto scene = Scene::create();
     
     auto layer = LevelScene::create();
