@@ -40,6 +40,10 @@
 		521A8EAA19F11F5000D177D7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 521A8EA819F11F5000D177D7 /* fonts */; };
 		52B47A471A53D09C004E4C60 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52B47A461A53D09B004E4C60 /* Security.framework */; };
 		8262943E1AAF051F00CB7CF7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8262943D1AAF051F00CB7CF7 /* Security.framework */; };
+		83DB8D7820E3DD6A0074C43D /* LevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83DB8D7620E3DD6A0074C43D /* LevelScene.cpp */; };
+		83DB8D7920E3DD6A0074C43D /* LevelScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83DB8D7620E3DD6A0074C43D /* LevelScene.cpp */; };
+		83DB8D7E20E404590074C43D /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83DB8D7C20E404590074C43D /* GameOver.cpp */; };
+		83DB8D7F20E404590074C43D /* GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83DB8D7C20E404590074C43D /* GameOver.cpp */; };
 		BDA5C7F420E00FFA0035A4C1 /* CountDown.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */; };
 		BDA5C7F520E00FFA0035A4C1 /* CountDown.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */; };
 		BDBC7E0D20DFE37A00B29CE2 /* close24.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBC7E0C20DFE37A00B29CE2 /* close24.png */; };
@@ -130,6 +134,10 @@
 		521A8EA819F11F5000D177D7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		52B47A461A53D09B004E4C60 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		8262943D1AAF051F00CB7CF7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		83DB8D7620E3DD6A0074C43D /* LevelScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LevelScene.cpp; sourceTree = "<group>"; };
+		83DB8D7720E3DD6A0074C43D /* LevelScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LevelScene.hpp; sourceTree = "<group>"; };
+		83DB8D7C20E404590074C43D /* GameOver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameOver.cpp; sourceTree = "<group>"; };
+		83DB8D7D20E404590074C43D /* GameOver.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameOver.hpp; sourceTree = "<group>"; };
 		BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CountDown.cpp; sourceTree = "<group>"; };
 		BDA5C7F320E00FFA0035A4C1 /* CountDown.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CountDown.hpp; sourceTree = "<group>"; };
 		BDBC7E0C20DFE37A00B29CE2 /* close24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close24.png; sourceTree = "<group>"; };
@@ -287,6 +295,10 @@
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				46880B8619C43A87006E1F66 /* HelloWorldScene.cpp */,
 				46880B8719C43A87006E1F66 /* HelloWorldScene.h */,
+				83DB8D7620E3DD6A0074C43D /* LevelScene.cpp */,
+				83DB8D7720E3DD6A0074C43D /* LevelScene.hpp */,
+				83DB8D7C20E404590074C43D /* GameOver.cpp */,
+				83DB8D7D20E404590074C43D /* GameOver.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -445,6 +457,8 @@
 			files = (
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
 				BDA5C7F420E00FFA0035A4C1 /* CountDown.cpp in Sources */,
+				83DB8D7820E3DD6A0074C43D /* LevelScene.cpp in Sources */,
+				83DB8D7E20E404590074C43D /* GameOver.cpp in Sources */,
 				1AF87B8B1F6F782A007BE51C /* RootViewController.mm in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				1AF87B8A1F6F7822007BE51C /* main.m in Sources */,
@@ -457,9 +471,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
+				83DB8D7F20E404590074C43D /* GameOver.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				46880B8B19C43A87006E1F66 /* HelloWorldScene.cpp in Sources */,
 				BDA5C7F520E00FFA0035A4C1 /* CountDown.cpp in Sources */,
+				83DB8D7920E3DD6A0074C43D /* LevelScene.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

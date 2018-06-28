@@ -25,12 +25,12 @@
 #include "HelloWorldScene.h"
 #include "SimpleAudioEngine.h"
 #include "CountDown.hpp"
+#include "LevelScene.hpp"
+
 #include <string>
 using namespace std;
 
 USING_NS_CC;
-
-CountDown* countDown = new CountDown();
 
 Scene* HelloWorld::createScene()
 {
@@ -56,6 +56,7 @@ bool HelloWorld::init()
     this->addChild(bGColor);
 
     
+<<<<<<< HEAD
     labelTime = Label::createWithTTF(countDown->timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
     {
@@ -71,9 +72,10 @@ bool HelloWorld::init()
     }
 
     
+=======
+>>>>>>> 64de8168b4f5e61bf86b5af27321235dffc7b2f3
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
 
   //  mySprite = Sprite::create("close24.png");
     
@@ -94,8 +96,6 @@ bool HelloWorld::init()
     level3MenuItem->setPosition(Point(visibleSize.width / 2 + 100, (visibleSize.height / 2)));
     level4MenuItem ->setPosition(Point(visibleSize.width / 2-100 , (visibleSize.height / 2)));
 
-
-   
     
     /////////////////////////////
     // 2. add a menu item with "X" image, which is clicked to quit the program
@@ -119,9 +119,7 @@ bool HelloWorld::init()
 
     auto *menu = Menu::create(startMenuItem,level4MenuItem , level2MenuItem, level3MenuItem,closeItem, NULL);
     menu->setPosition(Point(0, 0));
-  
     
-    this->schedule(CC_SCHEDULE_SELECTOR(HelloWorld::update), 1.0f);
     this->addChild(menu);
 
     /////////////////////////////
@@ -164,7 +162,15 @@ void HelloWorld::levelDrei(cocos2d::Ref *pSender)
     CCLOG("Level3");
 }
 void HelloWorld::levelEins(cocos2d::Ref *pSender)
-{ CCLOG("Level1");}
+{
+    //auto scene = Scene::create();
+    auto scene = LevelScene::createScene();
+    Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
+    
+    CCLOG("Level1");
+    
+}
+
 
 
     // add "HelloWorld" splash screen"
@@ -188,10 +194,7 @@ void HelloWorld::levelEins(cocos2d::Ref *pSender)
 
 //}
 
-void HelloWorld::update(float dt){
-    countDown->update(dt);
-    labelTime->setString(countDown->timer);
-}
+
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
