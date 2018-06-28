@@ -55,13 +55,17 @@ include_directories(
 # add cross-platforms source files and header files 
 list(APPEND GAME_SOURCE
      Classes/AppDelegate.cpp
-     Classes/HelloWorldScene.cpp
 	 Classes/CountDown.cpp
+	 Classes/GameOver.cpp
+     Classes/HelloWorldScene.cpp
+	 Classes/LevelScene.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
-     Classes/HelloWorldScene.h
 	 Classes/CountDown.hpp
+	 Classes/GameOverScene.hpp
+     Classes/HelloWorldScene.h
+	 Classes/LevelScene.hpp
      )
 
 if(ANDROID)

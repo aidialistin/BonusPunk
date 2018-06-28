@@ -77,11 +77,8 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-  //  mySprite = Sprite::create("close24.png");
-    
-  //  mySprite->setPosition(Point((visibleSize.width-20) + origin.x, (visibleSize.height-20) + origin.y));
-    
-  //  this->addChild(mySprite);
+// Menü-Design von Aida
+
     auto start = Label::createWithSystemFont("Start", "Arial", 30.0);
     auto level1 = Label::createWithSystemFont("Level1", "Arial", 20.0);
     auto level2 = Label::createWithSystemFont("Level2", "Arial", 20.0);
@@ -90,7 +87,8 @@ bool HelloWorld::init()
     auto level2MenuItem = MenuItemLabel::create(level2, CC_CALLBACK_1(HelloWorld::levelAdd, this));
     auto level3MenuItem = MenuItemLabel::create(level3, CC_CALLBACK_1(HelloWorld::levelDrei, this));
     auto level4MenuItem = MenuItemLabel::create(level1, CC_CALLBACK_1(HelloWorld::levelEins, this));
-    
+
+	// Menü-Label Positionen    
     startMenuItem ->setPosition(Point(visibleSize.width / 2, (visibleSize.height / 4-10) * 3));
     level2MenuItem->setPosition(Point(visibleSize.width / 2 , (visibleSize.height / 2)));
     level3MenuItem->setPosition(Point(visibleSize.width / 2 + 100, (visibleSize.height / 2)));
