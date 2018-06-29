@@ -26,6 +26,8 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "Player.h"
+#include "enums.h"
 #include "CountDown.hpp"
 #include <string>
 using namespace std;
@@ -50,6 +52,17 @@ public:
     void levelAdd(Ref *pSender);
     void levelDrei(Ref *pSender);
     void levelEins(Ref *pSender);
+
+//	void update(float dt) override;
+
+private:
+
+	Player* _player;
+	void initKeyboard();
+	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
+
 };
+
 
 #endif // __HELLOWORLD_SCENE_H__
