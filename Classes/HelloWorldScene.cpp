@@ -55,26 +55,7 @@ bool HelloWorld::init()
     auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
     this->addChild(bGColor);
 
-    
-<<<<<<< HEAD
-    labelTime = Label::createWithTTF(countDown->timer, "fonts/arial.ttf", 24);
-    if (labelTime == nullptr)
-    {
-        problemLoading("'fonts/arial.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen
-        labelTime->setPosition(Vec2(100, 300));
-        
-        // add the label as a child to this layer
-        this->addChild(labelTime, 2);
-    }
-
-    
-=======
->>>>>>> 64de8168b4f5e61bf86b5af27321235dffc7b2f3
-
+   
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
