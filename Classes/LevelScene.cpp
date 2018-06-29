@@ -9,7 +9,6 @@
 #include "CountDown.hpp"
 
 
-CountDown* countDown = new CountDown();
 
 LevelScene::LevelScene(void)
 {
@@ -43,6 +42,7 @@ bool LevelScene::init()
         return false;
     }
     
+    CountDown countDown = *new CountDown();
     auto size = Director::getInstance()->getWinSize();
     auto background = Sprite::create("res/images/testbackground.PNG");
     
@@ -51,7 +51,7 @@ bool LevelScene::init()
     
     background->setPosition(size.width/2, size.height/2);
     this->addChild(background);    // add a background sprite to watch more obviously
-    labelTime = Label::createWithTTF(countDown->timer, "fonts/arial.ttf", 24);
+    labelTime = Label::createWithTTF(countDown.timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
     {
         problemLoading("'fonts/arial.ttf'");
@@ -70,8 +70,8 @@ bool LevelScene::init()
 }
 
 void LevelScene::update(float dt){
-    countDown->update(dt);
-    labelTime->setString(countDown->timer);
+    countDown.update(dt);
+    labelTime->setString(countDown.timer);
 }
 
 
