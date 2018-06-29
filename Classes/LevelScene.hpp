@@ -12,6 +12,7 @@
 
 #pragma once
 #include "cocos2d.h"
+#include "CountDown.hpp"
 
 USING_NS_CC;
 
@@ -21,6 +22,7 @@ public:
     LevelScene(void);
     ~LevelScene(void);
     cocos2d::Label* labelTime;
+    CountDown countDown;
     static cocos2d::Scene* createScene();
     virtual void update(float dt) override;
     CREATE_FUNC(LevelScene);
