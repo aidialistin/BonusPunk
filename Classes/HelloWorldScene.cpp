@@ -55,10 +55,6 @@ bool HelloWorld::init()
     auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
     this->addChild(bGColor);
 
-   
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
 // Menü-Design von Aida
 
     
