@@ -109,7 +109,7 @@ bool HelloWorld::init()
 	_player = Player::create("res/images/first_sprite_test.PNG");
 	_player->setScale(0.2);
 	_player->setAnchorPoint(Vec2::ZERO);
-	_player->setPosition(Vec2(visibleSize.width/2 + origin.x, _player-> getContentSize().height * 2));
+	_player->setPosition(Vec2(visibleSize.width/2 + origin.x, 0)); 
 	this->addChild(_player, 0);
 
 	this->initKeyboard();

@@ -14,7 +14,8 @@ Player* Player::create(const std::string& filename)
 		player->autorelease();
 		player->setState(&PlayerState::idling);
 		return player;
-	}	CC_SAFE_DELETE(player);
+	}
+	CC_SAFE_DELETE(player);
 	return nullptr;
 }
 
