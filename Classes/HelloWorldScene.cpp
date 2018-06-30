@@ -106,14 +106,15 @@ bool HelloWorld::init()
     // 3. add your codes below...
 
 
-	_player = Player::create("first_sprite_test.PNG");
+	_player = Player::create("res/images/first_sprite_test.PNG");
+	_player->setScale(0.2);
 	_player->setAnchorPoint(Vec2::ZERO);
 	_player->setPosition(Vec2(visibleSize.width/2 + origin.x, _player-> getContentSize().height * 2));
 	this->addChild(_player, 0);
 
-//	this->initKeyboard();
+	this->initKeyboard();
 
-//	this->scheduleUpdate();
+	this->scheduleUpdate();
 
     // add a label shows "Hello World"
     // create and initialize a label
@@ -183,7 +184,50 @@ void HelloWorld::levelEins(cocos2d::Ref *pSender)
 
 //}
 
+void HelloWorld::initKeyboard()
+{
+	auto keyListener = EventListenerKeyboard::create();
+	keyListener->onKeyPressed = CC_CALLBACK_2(HelloWorld::onKeyPressed, this);
+	keyListener->onKeyReleased = CC_CALLBACK_2(HelloWorld::onKeyReleased, this);
 
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
+}
+
+void HelloWorld::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event)
+{
+	switch(key)
+	{
+	case cocos2d::EventKeyboard::KeyCode::KEY_A:
+		_player->input(Input::LEFT_PRESS);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_D:
+		_player->input(Input::RIGHT_PRESS);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+		_player->input(Input::JUMP_PRESS);
+		break;
+	default:
+		break;
+	}
+}
+
+void HelloWorld::onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event)
+{
+	switch (key)
+	{
+	case cocos2d::EventKeyboard::KeyCode::KEY_A:
+		_player->input(Input::LEFT_RELEASE);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_D:
+		_player->input(Input::RIGHT_RELEASE);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+		_player->input(Input::JUMP_RELEASE);
+		break;
+	default:
+		break;
+	}
+}
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
@@ -203,4 +247,9 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 }
 
 
+
+void HelloWorld::update(float dt)
+{
+	_player->update(dt);
+}
 
