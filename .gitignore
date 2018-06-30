@@ -1,8 +1,8 @@
-/bin/
-/linux-build/
-/cocos2d/
-/proj.ios_mac/
-/proj.linux/
-/proj.win32/
-/proj.android/
+bin/
+linux-build/
+cocos2d/
+proj.ios_mac/
+proj.linux/
+proj.win32/
+proj.android/
 
