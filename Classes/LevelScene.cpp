@@ -120,7 +120,7 @@ void LevelScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Even
 	case cocos2d::EventKeyboard::KeyCode::KEY_D:
 		_player->input(Input::RIGHT_PRESS);
 		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+	case cocos2d::EventKeyboard::KeyCode::KEY_W:
 		_player->input(Input::JUMP_PRESS);
 		break;
 	default:
