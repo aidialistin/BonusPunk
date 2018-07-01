@@ -23,7 +23,7 @@ public:
     ~LevelScene(void);
     cocos2d::Label* labelTime;
     CountDown countDown;
-    static cocos2d::Scene* createScene();
+    static cocos2d::Scene* createScene(int level);
     virtual void update(float dt) override;
     CREATE_FUNC(LevelScene);
     

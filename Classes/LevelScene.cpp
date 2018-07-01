@@ -8,7 +8,7 @@
 #include "LevelScene.hpp"
 #include "CountDown.hpp"
 
-
+int i;
 
 LevelScene::LevelScene(void)
 {
@@ -25,7 +25,10 @@ static void problemLoading(const char* filename)
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
-Scene* LevelScene::createScene() {
+Scene* LevelScene::createScene(int level) {
+    
+    i = level;
+    
     auto scene = Scene::create();
     
     auto layer = LevelScene::create();
@@ -44,13 +47,20 @@ bool LevelScene::init()
     
     CountDown countDown = *new CountDown();
     auto size = Director::getInstance()->getWinSize();
-    auto background = Sprite::create("res/images/testbackground.PNG");
+    auto background = Sprite::create("");
     
+    if (i == 1) {
+        background = Sprite::create("res/images/testbackground.PNG");
+    } else if (i == 2){
+        background = Sprite::create("close.png");
+    } else if (i == 3) {
+        background = Sprite::create("close24.png");
+    }
     
     background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
-    
     background->setPosition(size.width/2, size.height/2);
     this->addChild(background);    // add a background sprite to watch more obviously
+    
     labelTime = Label::createWithTTF(countDown.timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
     {

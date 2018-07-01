@@ -134,23 +134,23 @@ void HelloWorld::Play(cocos2d::Ref *pSender)
     CCLOG("Play");
 }
 
-void HelloWorld::levelAdd(cocos2d::Ref *pSender)
-{
-    CCLOG("level2");
-}
-
 void HelloWorld::levelDrei(cocos2d::Ref *pSender)
 {
-    CCLOG("Level3");
+    auto scene = LevelScene::createScene(3);
+    Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
 }
+
+void HelloWorld::levelAdd(cocos2d::Ref *pSender)
+{
+    auto scene = LevelScene::createScene(2);
+    Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
+}
+
 void HelloWorld::levelEins(cocos2d::Ref *pSender)
 {
     //auto scene = Scene::create();
-    auto scene = LevelScene::createScene();
+    auto scene = LevelScene::createScene(1);
     Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
-    
-    CCLOG("Level1");
-    
 }
 
 
