@@ -59,6 +59,8 @@ list(APPEND GAME_SOURCE
 	 Classes/GameOver.cpp
      Classes/HelloWorldScene.cpp
 	 Classes/LevelScene.cpp
+	 Classes/Player.cpp
+	 Classes/PlayerState.cpp
      )
 list(APPEND GAME_HEADER
      Classes/AppDelegate.h
@@ -66,6 +68,9 @@ list(APPEND GAME_HEADER
 	 Classes/GameOver.hpp
      Classes/HelloWorldScene.h
 	 Classes/LevelScene.hpp
+	 Classes/Player.h
+	 Classes/PlayerState.h
+	 Classes/enums.h
      )
 
 if(ANDROID)

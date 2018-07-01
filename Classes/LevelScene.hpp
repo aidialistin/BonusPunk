@@ -12,6 +12,10 @@
 
 #pragma once
 #include "cocos2d.h"
+#include "CountDown.hpp"
+#include "enums.h"
+#include "Player.h"
+
 
 USING_NS_CC;
 
@@ -21,14 +25,22 @@ public:
     LevelScene(void);
     ~LevelScene(void);
     cocos2d::Label* labelTime;
-    static cocos2d::Scene* createScene();
+    CountDown countDown;
+    static cocos2d::Scene* createScene(int level);
     virtual void update(float dt) override;
+    void playerUpdate(float dt);
     CREATE_FUNC(LevelScene);
     
     virtual bool init() override;
     
     void startGame();
-    
+
+private:
+
+	Player* _player;
+	void initKeyboard();
+	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
 };
 
 #endif /* LevelScene_hpp */

@@ -55,7 +55,6 @@ bool HelloWorld::init()
     auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
     this->addChild(bGColor);
 
-   
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
@@ -106,6 +105,7 @@ bool HelloWorld::init()
     // 3. add your codes below...
 
 
+
     // add a label shows "Hello World"
     // create and initialize a label
 
@@ -132,23 +132,23 @@ void HelloWorld::Play(cocos2d::Ref *pSender)
     CCLOG("Play");
 }
 
-void HelloWorld::levelAdd(cocos2d::Ref *pSender)
-{
-    CCLOG("level2");
-}
-
 void HelloWorld::levelDrei(cocos2d::Ref *pSender)
 {
-    CCLOG("Level3");
+    auto scene = LevelScene::createScene(3);
+    Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
 }
+
+void HelloWorld::levelAdd(cocos2d::Ref *pSender)
+{
+    auto scene = LevelScene::createScene(2);
+    Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
+}
+
 void HelloWorld::levelEins(cocos2d::Ref *pSender)
 {
     //auto scene = Scene::create();
-    auto scene = LevelScene::createScene();
+    auto scene = LevelScene::createScene(1);
     Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
-    
-    CCLOG("Level1");
-    
 }
 
 
@@ -192,6 +192,5 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 
 }
-
 
 
