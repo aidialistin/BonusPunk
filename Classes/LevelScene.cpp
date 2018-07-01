@@ -53,9 +53,9 @@ bool LevelScene::init()
     if (i == 1) {
         background = Sprite::create("res/images/testbackground.PNG");
     } else if (i == 2){
-        background = Sprite::create("close.png");
+        background = Sprite::create("res/images/background_2.jpg");
     } else if (i == 3) {
-        background = Sprite::create("close24.png");
+        background = Sprite::create("res/images/background_3.jpg");
     }
     
     background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
