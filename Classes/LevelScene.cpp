@@ -45,6 +45,7 @@ bool LevelScene::init()
     CountDown countDown = *new CountDown();
     auto size = Director::getInstance()->getWinSize();
     auto background = Sprite::create("res/images/testbackground.PNG");
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     
     background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
@@ -66,13 +67,67 @@ bool LevelScene::init()
     }
     
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
+
+	_player = Player::create("res/images/first_sprite_test.PNG");
+	_player->setScale(0.2);
+	_player->setAnchorPoint(Vec2::ZERO);
+	_player->setPosition(Vec2(size.width/2 + origin.x, 0)); 
+	this->addChild(_player, 0);
+
+	this->initKeyboard();
+
     return true;
 }
 
 void LevelScene::update(float dt){
     countDown.update(dt);
     labelTime->setString(countDown.timer);
+	_player->update(dt);
+}
+
+void LevelScene::initKeyboard()
+{
+	auto keyListener = EventListenerKeyboard::create();
+	keyListener->onKeyPressed = CC_CALLBACK_2(LevelScene::onKeyPressed, this);
+	keyListener->onKeyReleased = CC_CALLBACK_2(LevelScene::onKeyReleased, this);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
 }
 
 
+void LevelScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event)
+{
+	switch(key)
+	{
+	case cocos2d::EventKeyboard::KeyCode::KEY_A:
+		_player->input(Input::LEFT_PRESS);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_D:
+		_player->input(Input::RIGHT_PRESS);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+		_player->input(Input::JUMP_PRESS);
+		break;
+	default:
+		break;
+	}
+}
+
+void LevelScene::onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event)
+{
+	switch (key)
+	{
+	case cocos2d::EventKeyboard::KeyCode::KEY_A:
+		_player->input(Input::LEFT_RELEASE);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_D:
+		_player->input(Input::RIGHT_RELEASE);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+		_player->input(Input::JUMP_RELEASE);
+		break;
+	default:
+		break;
+	}
+}
 

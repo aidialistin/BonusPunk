@@ -53,14 +53,6 @@ public:
     void levelDrei(Ref *pSender);
     void levelEins(Ref *pSender);
 
-	void update(float dt) override;
-
-private:
-
-	Player* _player;
-	void initKeyboard();
-	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
-	void onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
 
 };
 
