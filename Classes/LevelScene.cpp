@@ -83,6 +83,3 @@ void LevelScene::update(float dt){
     countDown.update(dt);
     labelTime->setString(countDown.timer);
 }
-
-
-
