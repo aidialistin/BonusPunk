@@ -8,3 +8,4 @@ proj.win32/
 proj.android/
 testCocosInTerminal.xcodeproj.zip
 .vs/
+*.swp
