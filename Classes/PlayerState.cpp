@@ -119,7 +119,7 @@ void Jump::handleInput(Player* player, Input input)
 //		player->setState(&PlayerState::jumping);
 		break;
 	case JUMP_RELEASE:
-		player->setState(&PlayerState::idling);
+		player->setState(&PlayerState::falling);
 		break;
 	case LEFT_PRESS:
 		break;
@@ -137,7 +137,7 @@ void Jump::handleInput(Player* player, Input input)
 void Jump::handleUpdate(Player* player, float dt)
 {
     static const float jumpStart = player->getPositionY();
-    static const float jumpMax = jumpStart + (player->getContentSize().height * 1.8);
+    static const float jumpMax = jumpStart + 200; //(player->getContentSize().height * 1.8);
     float currentY = player->getPositionY();
     float newY = currentY + 4;
     
