@@ -125,6 +125,9 @@ void LevelScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Even
 	case cocos2d::EventKeyboard::KeyCode::KEY_W:
 		_player->input(Input::JUMP_PRESS);
 		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+		_player->input(Input::SHOOT_PRESS);
+		break;
 	default:
 		break;
 	}
@@ -140,8 +143,11 @@ void LevelScene::onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Eve
 	case cocos2d::EventKeyboard::KeyCode::KEY_D:
 		_player->input(Input::RIGHT_RELEASE);
 		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+	case cocos2d::EventKeyboard::KeyCode::KEY_W:
 		_player->input(Input::JUMP_RELEASE);
+		break;
+	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+		_player->input(Input::SHOOT_RELEASE);
 		break;
 	default:
 		break;
