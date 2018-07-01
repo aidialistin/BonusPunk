@@ -77,6 +77,7 @@ bool LevelScene::init()
     }
     
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
+    this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::playerUpdate));
 
 	_player = Player::create("res/images/first_sprite_test.PNG");
 	_player->setScale(0.2);
@@ -92,7 +93,11 @@ bool LevelScene::init()
 void LevelScene::update(float dt){
     countDown.update(dt);
     labelTime->setString(countDown.timer);
-	_player->update(dt);
+}
+
+void LevelScene::playerUpdate(float dt)
+{
+    _player->update(dt);
 }
 
 void LevelScene::initKeyboard()
