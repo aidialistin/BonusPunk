@@ -7,8 +7,10 @@
 
 #include "LevelScene.hpp"
 #include "CountDown.hpp"
+#include <string>
+using namespace std;
 
-
+USING_NS_CC;
 
 LevelScene::LevelScene(void)
 {
@@ -71,7 +73,7 @@ bool LevelScene::init()
 	_player = Player::create("res/images/first_sprite_test.PNG");
 	_player->setScale(0.2);
 	_player->setAnchorPoint(Vec2::ZERO);
-	_player->setPosition(Vec2(size.width/2 + origin.x, 0)); 
+	_player->setPosition(Vec2(size.width/2 + origin.x, origin.y)); 
 	this->addChild(_player, 0);
 
 	this->initKeyboard();
