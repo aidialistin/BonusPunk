@@ -10,7 +10,7 @@
 #include <string>
 using namespace std;
 
-USING_NS_CC;
+int i;
 
 LevelScene::LevelScene(void)
 {
@@ -27,7 +27,10 @@ static void problemLoading(const char* filename)
     printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
 }
 
-Scene* LevelScene::createScene() {
+Scene* LevelScene::createScene(int level) {
+    
+    i = level;
+    
     auto scene = Scene::create();
     
     auto layer = LevelScene::create();
@@ -46,14 +49,21 @@ bool LevelScene::init()
     
     CountDown countDown = *new CountDown();
     auto size = Director::getInstance()->getWinSize();
-    auto background = Sprite::create("res/images/testbackground.PNG");
+    auto background = Sprite::create("");
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
+    if (i == 1) {
+        background = Sprite::create("res/images/testbackground.PNG");
+    } else if (i == 2){
+        background = Sprite::create("res/images/background_2.jpg");
+    } else if (i == 3) {
+        background = Sprite::create("res/images/background_3.jpg");
+    }
     
     background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
-    
     background->setPosition(size.width/2, size.height/2);
     this->addChild(background);    // add a background sprite to watch more obviously
+    
     labelTime = Label::createWithTTF(countDown.timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
     {
@@ -69,6 +79,7 @@ bool LevelScene::init()
     }
     
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
+    this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::playerUpdate));
 
 	_player = Player::create("res/images/first_sprite_test.PNG");
 	_player->setScale(0.2);
@@ -84,7 +95,11 @@ bool LevelScene::init()
 void LevelScene::update(float dt){
     countDown.update(dt);
     labelTime->setString(countDown.timer);
-	_player->update(dt);
+}
+
+void LevelScene::playerUpdate(float dt)
+{
+    _player->update(dt);
 }
 
 void LevelScene::initKeyboard()
@@ -107,7 +122,7 @@ void LevelScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Even
 	case cocos2d::EventKeyboard::KeyCode::KEY_D:
 		_player->input(Input::RIGHT_PRESS);
 		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+	case cocos2d::EventKeyboard::KeyCode::KEY_W:
 		_player->input(Input::JUMP_PRESS);
 		break;
 	default:

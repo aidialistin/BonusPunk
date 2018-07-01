@@ -64,7 +64,14 @@ void WalkLeft::handleInput(Player* player, Input input)
 
 void WalkLeft::handleUpdate(Player* player, float dt)
 {
-
+    static const float maxLeft = 0;
+    float currentX = player->getPositionX();
+    float newX = currentX - 3;
+    
+    if (newX >= maxLeft)
+        player->setPositionX(newX);
+    else
+        player->setPositionX(maxLeft);
 }
 
 
@@ -94,7 +101,13 @@ void WalkRight::handleInput(Player* player, Input input)
 
 void WalkRight::handleUpdate(Player* player, float dt)
 {
-
+    static const float maxRight = Director::getInstance()->getVisibleSize().width - 128; //- player->getContentSize().width;
+    float currentX = player->getPositionX();
+    float newX = currentX + 3;
+    
+    if (newX <= maxRight) player->setPositionX(newX);
+    else
+        player->setPositionX(maxRight);
 }
 
 
@@ -106,7 +119,7 @@ void Jump::handleInput(Player* player, Input input)
 //		player->setState(&PlayerState::jumping);
 		break;
 	case JUMP_RELEASE:
-		player->setState(&PlayerState::idling);
+		player->setState(&PlayerState::falling);
 		break;
 	case LEFT_PRESS:
 		break;
@@ -123,11 +136,15 @@ void Jump::handleInput(Player* player, Input input)
 
 void Jump::handleUpdate(Player* player, float dt)
 {
-
+    static const float jumpStart = player->getPositionY();
+    static const float jumpMax = jumpStart + 200; //(player->getContentSize().height * 1.8);
+    float currentY = player->getPositionY();
+    float newY = currentY + 4;
+    
+    if (newY <= jumpMax) player->setPositionY(newY);
+    else
+        player->setState(&PlayerState::falling);
 }
-
-
-
 
 void Fall::handleInput(Player* player, Input input)
 {
@@ -154,5 +171,13 @@ void Fall::handleInput(Player* player, Input input)
 
 void Fall::handleUpdate(Player* player, float dt)
 {
-
+    static const float jumpMax = player->getPositionY();
+    static const float jumpStart = jumpMax - (player->getContentSize().height * 1.8);
+    float currentY = player->getPositionY();
+    float newY = currentY - 4;
+    
+    if (newY >= jumpStart)
+        player->setPositionY(newY);
+    else
+        player->setState(&PlayerState::idling);
 }
