@@ -31,9 +31,12 @@ Scene* LevelScene::createScene(int level) {
     
     i = level;
     
-    auto scene = Scene::create();
+    auto scene = Scene::createWithPhysics();
+    scene->getPhysicsWorld()->setGravity(Vec2(0, -900));
+	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
     
     auto layer = LevelScene::create();
+	layer->SetPhysicsWorld( scene->getPhysicsWorld() );
     
     scene->addChild(layer);
     
@@ -80,6 +83,14 @@ bool LevelScene::init()
     
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::playerUpdate));
+
+// Physics-Teil des Player-Sprites
+	auto edgeBody = PhysicsBody::createEdgeBox( size, PHYSICSBODY_MATERIAL_DEFAULT, 3);
+
+	auto edgeNode = Node::create();
+	edgeNode->setPosition( Point( size.width/2 - origin.x , size.height /2 + origin.y) );
+	edgeNode->setPhysicsBody( edgeBody );
+	this->addChild( edgeNode );
 
 	_player = Player::create("res/images/first_sprite_test.PNG");
 	_player->setScale(0.2);

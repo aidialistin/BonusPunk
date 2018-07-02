@@ -41,6 +41,10 @@ private:
 	void initKeyboard();
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
+//	Physics
+	cocos2d::PhysicsWorld *sceneWorld;
+
+	void SetPhysicsWorld( cocos2d::PhysicsWorld *world) { sceneWorld = world; };
 };
 
 #endif /* LevelScene_hpp */
