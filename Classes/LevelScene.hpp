@@ -45,6 +45,8 @@ private:
 	cocos2d::PhysicsWorld *sceneWorld;
 
 	void SetPhysicsWorld( cocos2d::PhysicsWorld *world) { sceneWorld = world; };
+
+	cocos2d::Vector getAnimation(const char *format, int count);
 };
 
 #endif /* LevelScene_hpp */
