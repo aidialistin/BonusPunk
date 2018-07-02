@@ -96,6 +96,11 @@ bool LevelScene::init()
 	_player->setScale(0.2);
 	_player->setAnchorPoint(Vec2::ZERO);
 	_player->setPosition(Vec2(size.width/2 + origin.x, origin.y)); 
+
+	auto spriteRectBody = PhysicsBody::createBox( _player->getContentSize( ), PhysicsMaterial( 0, 1, 0));
+	_player->setPhysicsBody( spriteRectBody );
+
+
 	this->addChild(_player, 0);
 
 	this->initKeyboard();
