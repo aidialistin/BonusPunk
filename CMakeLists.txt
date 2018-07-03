@@ -71,7 +71,6 @@ list(APPEND GAME_HEADER
 	 Classes/Player.h
 	 Classes/PlayerState.h
 	 Classes/enums.h
-     Classes/HelloWorldScene.cpp
      )
 
 if(ANDROID)

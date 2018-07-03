@@ -16,6 +16,8 @@ friend class WalkLeft;
 friend class WalkRight;
 friend class Jump;
 friend class Fall;
+friend class Shoot;
+friend class Reload;
 
 public:
 
@@ -25,6 +27,7 @@ public:
 
 	void input(Input input);
 	void update(float dt) override;
+//	void collision(bool b) override;
 
 protected:
 

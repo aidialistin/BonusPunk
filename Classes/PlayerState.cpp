@@ -7,6 +7,10 @@ WalkLeft PlayerState::goingLeft;
 WalkRight PlayerState::goingRight;
 Jump PlayerState::jumping;
 Fall PlayerState::falling;
+Shoot PlayerState::shooting;
+Reload PlayerState::reloading;
+
+static float jumpStart = 0;
 
 void Idle::handleInput(Player* player, Input input)
 {
@@ -27,6 +31,9 @@ void Idle::handleInput(Player* player, Input input)
 		break;
 	case RIGHT_RELEASE:
 		break;
+	case SHOOT_PRESS:
+		player->setState(&PlayerState::shooting);
+		break;
 	default:
 		break;
 	}
@@ -43,7 +50,7 @@ void WalkLeft::handleInput(Player* player, Input input)
 	switch (input)
 	{
 	case JUMP_PRESS:
-//		player->setState(&PlayerState::jumping);
+		player->setState(&PlayerState::jumping);
 		break;
 	case JUMP_RELEASE:
 		break;
@@ -80,7 +87,7 @@ void WalkRight::handleInput(Player* player, Input input)
 	switch (input)
 	{
 	case JUMP_PRESS:
-//		player->setState(&PlayerState::jumping);
+		player->setState(&PlayerState::jumping);
 		break;
 	case JUMP_RELEASE:
 		break;
@@ -101,7 +108,7 @@ void WalkRight::handleInput(Player* player, Input input)
 
 void WalkRight::handleUpdate(Player* player, float dt)
 {
-    static const float maxRight = Director::getInstance()->getVisibleSize().width - 128; //- player->getContentSize().width;
+    static const float maxRight = Director::getInstance()->getVisibleSize().width - 64; //- player->getContentSize().width;
     float currentX = player->getPositionX();
     float newX = currentX + 3;
     
@@ -119,13 +126,20 @@ void Jump::handleInput(Player* player, Input input)
 //		player->setState(&PlayerState::jumping);
 		break;
 	case JUMP_RELEASE:
-		player->setState(&PlayerState::falling);
 		break;
 	case LEFT_PRESS:
 		break;
 	case LEFT_RELEASE:
 		break;
 	case RIGHT_PRESS:
+		/*
+		static const float maxRight = Director::getInstance()->getVisibleSize().width - 64; 
+		float currentJumpX = player->getPositionX();
+		float newJumpX = currentJumpX + 3; 
+		if (newJumpX <= maxRight) player->setPositionX(newJumpX);
+		else
+        	player->setPositionX(maxRight);
+			*/
 		break;
 	case RIGHT_RELEASE:
 		break;
@@ -136,14 +150,15 @@ void Jump::handleInput(Player* player, Input input)
 
 void Jump::handleUpdate(Player* player, float dt)
 {
-    static const float jumpStart = player->getPositionY();
-    static const float jumpMax = jumpStart + 200; //(player->getContentSize().height * 1.8);
-    float currentY = player->getPositionY();
-    float newY = currentY + 4;
-    
-    if (newY <= jumpMax) player->setPositionY(newY);
-    else
+    jumpStart = player->getPositionY();
+	static const float jumpHeight = jumpStart + 320; 
+	float currentHeight = player->getPositionY(); 
+	player->setPositionY(currentHeight + 8);
+
+	if (currentHeight >= jumpHeight) {
         player->setState(&PlayerState::falling);
+	}
+
 }
 
 void Fall::handleInput(Player* player, Input input)
@@ -154,7 +169,6 @@ void Fall::handleInput(Player* player, Input input)
 //		player->setState(&PlayerState::jumping);
 		break;
 	case JUMP_RELEASE:
-		player->setState(&PlayerState::idling);
 		break;
 	case LEFT_PRESS:
 		break;
@@ -171,13 +185,71 @@ void Fall::handleInput(Player* player, Input input)
 
 void Fall::handleUpdate(Player* player, float dt)
 {
-    static const float jumpMax = player->getPositionY();
-    static const float jumpStart = jumpMax - (player->getContentSize().height * 1.8);
+//    static const float jumpStart = jumpMax - 200;
     float currentY = player->getPositionY();
-    float newY = currentY - 4;
-    
-    if (newY >= jumpStart)
-        player->setPositionY(newY);
-    else
-        player->setState(&PlayerState::idling);
+//	Hier Kollisionsabfrage mit Boden als bool-statement
 }
+
+
+void Shoot::handleInput(Player* player, Input input)
+{
+	switch (input)
+	{
+	case JUMP_PRESS:
+		break;
+	case JUMP_RELEASE:
+		break;
+	case LEFT_PRESS:
+		break;
+	case LEFT_RELEASE:
+		break;
+	case RIGHT_PRESS:
+		break;
+	case RIGHT_RELEASE:
+		break;
+	case SHOOT_PRESS:
+		break;
+	case SHOOT_RELEASE:
+		
+		player->setState(&PlayerState::reloading);
+		break;
+	default:
+		break;
+	}
+}
+
+void Shoot::handleUpdate(Player* player, float dt)
+{
+
+}
+
+
+void Reload::handleInput(Player* player, Input input)
+{
+	switch (input)
+	{
+	case JUMP_PRESS:
+		player->setState(&PlayerState::jumping);
+		break;
+	case JUMP_RELEASE:
+		break;
+	case LEFT_PRESS:
+		player->setState(&PlayerState::goingLeft);
+		break;
+	case LEFT_RELEASE:
+		break;
+	case RIGHT_PRESS:
+		player->setState(&PlayerState::goingRight);
+		break;
+	case RIGHT_RELEASE:
+		break;
+	default:
+		break;
+	}
+}
+
+void Reload::handleUpdate(Player* player, float dt)
+{
+
+}
+

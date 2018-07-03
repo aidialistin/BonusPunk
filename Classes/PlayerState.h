@@ -11,6 +11,8 @@ class WalkLeft;
 class WalkRight;
 class Jump;
 class Fall;
+class Shoot;
+class Reload;
 
 class PlayerState
 {
@@ -21,6 +23,8 @@ public:
 	static WalkRight goingRight;
 	static Jump jumping;
 	static Fall falling;
+	static Shoot shooting;
+	static Reload reloading;
 
 	virtual void handleInput(Player* player, Input input) = 0;
 	virtual void handleUpdate(Player* player, float dt) = 0;
@@ -62,6 +66,19 @@ public:
 	void handleUpdate(Player* player, float dt);
 };
 
+class Shoot : public PlayerState
+{
+public:
+	void handleInput(Player* player, Input input);
+	void handleUpdate(Player* player, float dt);
+};
+
+class Reload : public PlayerState
+{
+public:
+	void handleInput(Player* player, Input input);
+	void handleUpdate(Player* player, float dt);
+};
 
 #endif // __PLAYER_STATE_H__
 
