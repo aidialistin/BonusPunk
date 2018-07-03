@@ -50,6 +50,10 @@ public:
     void levelAdd(Ref *pSender);
     void levelDrei(Ref *pSender);
     void levelEins(Ref *pSender);
+   // void onEnter();
+
+private:
+    cocos2d::Vector<cocos2d::SpriteFrame*> getAnimation(const char *format, int count);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
