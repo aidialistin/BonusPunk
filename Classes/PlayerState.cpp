@@ -10,6 +10,8 @@ Fall PlayerState::falling;
 Shoot PlayerState::shooting;
 Reload PlayerState::reloading;
 
+static float jumpStart = 0;
+
 void Idle::handleInput(Player* player, Input input)
 {
 	switch (input)
@@ -130,6 +132,14 @@ void Jump::handleInput(Player* player, Input input)
 	case LEFT_RELEASE:
 		break;
 	case RIGHT_PRESS:
+		/*
+		static const float maxRight = Director::getInstance()->getVisibleSize().width - 64; 
+		float currentJumpX = player->getPositionX();
+		float newJumpX = currentJumpX + 3; 
+		if (newJumpX <= maxRight) player->setPositionX(newJumpX);
+		else
+        	player->setPositionX(maxRight);
+			*/
 		break;
 	case RIGHT_RELEASE:
 		break;
@@ -140,15 +150,14 @@ void Jump::handleInput(Player* player, Input input)
 
 void Jump::handleUpdate(Player* player, float dt)
 {
-    static const float jumpStart = player->getPositionY();
-	float jumpHeight = player->getPositionY();
-	float lastHeight = jumpStart;
+    jumpStart = player->getPositionY();
+	static const float jumpHeight = jumpStart + 320; 
+	float currentHeight = player->getPositionY(); 
+	player->setPositionY(currentHeight + 8);
 
-
-	if (jumpHeight > lastHeight) lastHeight = jumpHeight;
-	else 
+	if (currentHeight >= jumpHeight) {
         player->setState(&PlayerState::falling);
-
+	}
 
 }
 
@@ -176,15 +185,9 @@ void Fall::handleInput(Player* player, Input input)
 
 void Fall::handleUpdate(Player* player, float dt)
 {
-    static const float jumpMax = player->getPositionY();
-    static const float jumpStart = jumpMax - 200;
+//    static const float jumpStart = jumpMax - 200;
     float currentY = player->getPositionY();
-    float newY = currentY - 4;
-    
-    if (newY >= jumpStart)
-        player->setPositionY(newY);
-    else
-        player->setState(&PlayerState::idling);
+//	Hier Kollisionsabfrage mit Boden als bool-statement
 }
 
 

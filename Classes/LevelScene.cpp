@@ -9,6 +9,7 @@
 #include "CountDown.hpp"
 #include <string>
 using namespace std;
+USING_NS_CC;
 
 int i;
 
@@ -54,6 +55,7 @@ bool LevelScene::init()
     auto size = Director::getInstance()->getWinSize();
     auto background = Sprite::create("");
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+//	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player.png");
     
     if (i == 1) {
         background = Sprite::create("res/images/testbackground.PNG");
@@ -84,27 +86,38 @@ bool LevelScene::init()
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::playerUpdate));
 
-// Physics-Teil des Player-Sprites
+// Physics-Teil 
+//	Ränder
 	auto edgeBody = PhysicsBody::createEdgeBox( size, PHYSICSBODY_MATERIAL_DEFAULT, 3);
+	//	Für Collision
+	edgeBody->setCollisionBitmask(1);
+	edgeBody->setContactTestBitmask(true);
 
 	auto edgeNode = Node::create();
 	edgeNode->setPosition( Point( size.width/2 - origin.x , size.height /2 + origin.y) );
 	edgeNode->setPhysicsBody( edgeBody );
 	this->addChild( edgeNode );
 
-	_player = Player::create("res/images/first_sprite_test.PNG");
-	_player->setScale(0.2);
+//	Player
+	_player = Player::create("res/images/ourGuy.png");
 	_player->setAnchorPoint(Vec2::ZERO);
 	_player->setPosition(Vec2(size.width/2 + origin.x, origin.y)); 
 
-	auto spriteRectBody = PhysicsBody::createBox( _player->getContentSize( ), PhysicsMaterial( 0, 1, 0));
+	auto spriteRectBody = PhysicsBody::createBox( _player->getContentSize( ), PhysicsMaterial( 0, 0, 0));
 	_player->setPhysicsBody( spriteRectBody );
+	spriteRectBody-> setRotationEnable(false);
+
+	// Für Collision
+	spriteRectBody->setCollisionBitmask(2);
+	spriteRectBody->setContactTestBitmask(true);
 
 
 	this->addChild(_player, 0);
-
 	this->initKeyboard();
 
+	auto contactListener = EventListenerPhysicsContact::create();
+	contactListener->onContactBegin = CC_CALLBACK_1(LevelScene::onContactBegin, this);
+	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
     return true;
 }
 
@@ -116,6 +129,21 @@ void LevelScene::update(float dt){
 void LevelScene::playerUpdate(float dt)
 {
     _player->update(dt);
+}
+
+bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
+{
+	PhysicsBody *a = contact.getShapeA()->getBody();
+	PhysicsBody *b = contact.getShapeB()->getBody();
+
+	//check for Collision
+	if ((1 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask() ) || (2 == a->getCollisionBitmask() && 1 == b->getCollisionBitmask() ) )
+	{
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void LevelScene::initKeyboard()

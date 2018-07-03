@@ -27,6 +27,7 @@ public:
 
 	void input(Input input);
 	void update(float dt) override;
+//	void collision(bool b) override;
 
 protected:
 

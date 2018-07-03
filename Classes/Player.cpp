@@ -44,4 +44,9 @@ void Player::update(float dt)
 {
 	_state->handleUpdate(this, dt);
 }
-
+/*
+void Player::update(float dt, bool colliion)
+{
+	_state->handleUpdate(this, dt, collision);
+}
+*/
