@@ -16,7 +16,7 @@
 #include "enums.h"
 #include "Player.h"
 
-
+using namespace cocos2d;
 USING_NS_CC;
 
 class LevelScene : public Layer
@@ -36,11 +36,13 @@ public:
     void startGame();
 
 private:
-
+    CCTMXTiledMap *_tileMap;
+    CCTMXLayer *_background;
 	Player* _player;
 	void initKeyboard();
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
+    void goToMenu(Ref *pSender);
 //	Physics
 	cocos2d::PhysicsWorld *sceneWorld;
 
