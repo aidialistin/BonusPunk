@@ -42,6 +42,7 @@ protected:
 private:
    
 	PlayerState* _state;
+    bool shootAllowed;
     cocos2d::Point _target;
     void shoot();
     void onMouseMove(cocos2d::Event* event);

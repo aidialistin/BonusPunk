@@ -256,6 +256,12 @@ void Reload::handleInput(Player* player, Input input)
 void Reload::handleUpdate(Player* player, float dt)
 {
     player->setState(&PlayerState::idling);
+    float delay = 3.0f;
+    auto delayAction = DelayTime::create(delay);
+    auto funcCallback = CallFunc::create([player](){
+        player->shootAllowed = true;
+    });
+    player->runAction(Sequence::create(delayAction, funcCallback, NULL));
 }
 
 
