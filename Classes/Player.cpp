@@ -6,10 +6,10 @@
 #include "Player.h"
 #include "enums.h"
 
-Player* Player::create(const std::string& filename)
+Player* Player::createWithSpriteFrame(cocos2d::SpriteFrame *spriteFrame)// (const std::string& filename)
 {
 	Player *player = new (std::nothrow) Player();
-	if (player && player->initWithFile(filename))
+	if (player && player->initWithSpriteFrame(spriteFrame)) //&& player->initWithFile(filenamme))
 	{
 		player->autorelease();
 		player->setState(&PlayerState::idling);
@@ -40,11 +40,12 @@ void Player::input(Input input)
 	_state->handleInput(this, input);
 }
 
-void Player::update(float dt)
+void Player::updatePlayer(float dt)
 {
     _state->handleUpdate(this, dt);
-    //auto mouseListener =  cocos2d::EventListenerMouse::create();
-    //mouseListener->onMouseMove = CC_CALLBACK_1(Player::onMouseMove, this);
+    auto mouseListener = cocos2d::EventListenerMouse::create();
+    mouseListener->onMouseMove = CC_CALLBACK_1(Player::onMouseMove, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 }
 /*
 void Player::update(float dt, bool colliion)
@@ -54,24 +55,21 @@ void Player::update(float dt, bool colliion)
 */
 
 void Player::shoot(){
-    auto mouseListener =  cocos2d::EventListenerMouse::create();
-    mouseListener->onMouseMove = CC_CALLBACK_1(Player::onMouseMove, this);
     auto bullet = create("close24.png");
     bullet->setPosition(100,100);
     this->addChild(bullet);
-    cocos2d::Point b = cocos2d::Point(200, 100);
-    auto moveTo = cocos2d::MoveTo::create(1.0f, b);
+    //cocos2d::Point a = cocos2d::Point(300, 100);
+    auto moveTo = cocos2d::MoveTo::create(1.0f, _target);
     auto delay = cocos2d::DelayTime::create( 0.1f );
     auto remove = cocos2d::CallFunc::create( [bullet](){bullet->removeFromParent();});
     auto action1 = cocos2d::Sequence::create(moveTo, delay, remove, nullptr );
     bullet->runAction(action1);
-
 }
 
 void Player::onMouseMove(cocos2d::Event *event)
 {
     CCLOG("moving");
-    /*cocos2d::EventMouse* e = (EventMouse*)event;
-    std::string str = "MousePosition X:";
-    str = str + tostr(e->getCursorX()) + " Y:" + tostr(e->getCursorY());*/
+    cocos2d::EventMouse* e = (cocos2d::EventMouse*)event;
+    _target = cocos2d::Point(e->getLocation());//e->getCursorX(), e->getCursorY());
+    
 }

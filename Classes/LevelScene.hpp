@@ -32,7 +32,7 @@ public:
     CREATE_FUNC(LevelScene);
     
     virtual bool init() override;
-    
+    Vector<SpriteFrame*> getAnimation(const char *format, int count);
     void startGame();
 
 private:
@@ -40,6 +40,7 @@ private:
     CCTMXLayer *_background;
 	Player* _player;
 	void initKeyboard();
+    void onMouseMove(cocos2d::Event *event);
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
 	void onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
     void goToMenu(Ref *pSender);
@@ -48,6 +49,7 @@ private:
 
 	void SetPhysicsWorld( cocos2d::PhysicsWorld *world) { sceneWorld = world; };
 	bool onContactBegin(cocos2d::PhysicsContact &contact);
+    
 
 };
 

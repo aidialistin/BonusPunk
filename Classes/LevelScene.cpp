@@ -113,9 +113,26 @@ bool LevelScene::init()
 	this->addChild( edgeNode );
 
 //	Player
+    
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player_plist.plist");
+    auto frames = getAnimation("Layer 1_sprite_0%01d.png", 5);
+    auto framesRight = getAnimation("Layer 1_sprite_0%01d.png", 5);
+    auto framesLeft = getAnimation("Layer 1_sprite_0%01d.png", 3);
+    _player = Player::createWithSpriteFrame(frames.front());
+    _player->setAnchorPoint(Vec2::ZERO);
+    _player->setPosition(Vec2(size.width/2 + origin.x, origin.y+200));
+    _player->walkLeftAnimation = Animation::createWithSpriteFrames(framesLeft, 1.0f/8);
+    _player->walkRightAnimation = Animation::createWithSpriteFrames(framesRight, 1.0f/8);
+    //_player->runAction(RepeatForever::create(Animate::create(_player->walkLeftAnimation)));
+    
+    /*_player = Player::create("res/images/player_plist.png");
+    _player->setPosition(Point((size.width/2) + origin.x, (size.height/2) + origin.y));
+    auto action=MoveBy::create(3,Point(100,10));
+    _player->runAction(EaseBounceIn::create(action));
+    this->addChild(_player);
 	_player = Player::create("res/images/ourGuy.png");
 	_player->setAnchorPoint(Vec2::ZERO);
-	_player->setPosition(Vec2(size.width/2 + origin.x, origin.y)); 
+	_player->setPosition(Vec2(size.width/2 + origin.x, origin.y));*/
 
 	auto spriteRectBody = PhysicsBody::createBox( _player->getContentSize( ), PhysicsMaterial( 0, 0, 0));
 	_player->setPhysicsBody( spriteRectBody );
@@ -124,7 +141,6 @@ bool LevelScene::init()
 	// Für Collision
 	spriteRectBody->setCollisionBitmask(2);
 	spriteRectBody->setContactTestBitmask(true);
-
 
 	this->addChild(_player, 0);
 	this->initKeyboard();
@@ -142,7 +158,7 @@ void LevelScene::update(float dt){
 
 void LevelScene::playerUpdate(float dt)
 {
-    _player->update(dt);
+    _player->updatePlayer(dt);
    /* ValueMap properties = _tileMap->getProperties();
     Value collision = properties["Collidable"];
     if (!collision.isNull()) {
@@ -173,8 +189,9 @@ void LevelScene::initKeyboard()
 	auto keyListener = EventListenerKeyboard::create();
 	keyListener->onKeyPressed = CC_CALLBACK_2(LevelScene::onKeyPressed, this);
 	keyListener->onKeyReleased = CC_CALLBACK_2(LevelScene::onKeyReleased, this);
+    
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
 
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
 }
 
 
@@ -225,3 +242,21 @@ void LevelScene::goToMenu(cocos2d::Ref *pSender)
     auto scene = HelloWorld::createScene();
     Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
 }
+
+Vector<SpriteFrame*> LevelScene::getAnimation(const char * format, int count)
+{
+    auto spritecache = SpriteFrameCache::getInstance();
+    Vector<SpriteFrame*> animFrames;
+    for(int i = 1; i <= count; i++)
+    {
+        string str = StringUtils::format("Layer 1_sprite_0%01d.png", i);
+        //animFrames.pushBack(spritecache->getSpriteFrameByName(str));
+        SpriteFrame* frame = spritecache->getSpriteFrameByName(str);
+        animFrames.pushBack(frame);
+        
+    }
+    return animFrames;
+}
+
+
+

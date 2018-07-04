@@ -26,9 +26,11 @@
 #include "SimpleAudioEngine.h"
 #include "CountDown.hpp"
 #include "LevelScene.hpp"
+#include <vector>
 
 #include <string>
 using namespace std;
+using namespace cocos2d;
 
 USING_NS_CC;
 
@@ -58,7 +60,28 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-// Menü-Design von Aida
+    /*SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player_plist.plist");
+   
+    auto background = Sprite::createWithSpriteFrameName("res/images/testbackground.png");
+    background->setPosition(origin.x + 200,origin.y + 200/2);
+    this->addChild(background);
+    //Vector<SpriteFrame*>  frames = getAnimation("res/images/Layer 1_sprite_%01d.png", 8);
+    auto frames = getAnimation("Layer 1_sprite_0%01d.png", 8);
+    auto sprite = Sprite::createWithSpriteFrame(frames.front());
+    this->addChild(sprite);
+    sprite->setPosition(100,620);
+    
+    auto animation = Animation::createWithSpriteFrames(frames, 1.0f/8);
+    sprite->runAction(RepeatForever::create(Animate::create(animation)));
+
+
+    mySprite = Sprite::create("res/images/player_plist.png");
+    
+    mySprite->setPosition(Point((visibleSize.width/2) + origin.x, (visibleSize.height/2) + origin.y));
+    auto action=MoveBy::create(3,Point(100,10));
+    mySprite->runAction(EaseBounceIn::create(action));
+    this->addChild(mySprite); */
+    
 
     auto start = Label::createWithSystemFont("Start", "Arial", 30.0);
     auto level1 = Label::createWithSystemFont("Level1", "Arial", 20.0);
@@ -126,7 +149,9 @@ bool HelloWorld::init()
     }
     return true;
     
-}
+}// ende intit
+
+
 void HelloWorld::Play(cocos2d::Ref *pSender)
 {
     CCLOG("Play");
@@ -192,5 +217,18 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 
 
 }
-
+Vector<SpriteFrame*> HelloWorld::getAnimation(const char * format, int count)
+{
+    auto spritecache = SpriteFrameCache::getInstance();
+    Vector<SpriteFrame*> animFrames;
+    for(int i = 1; i <= count; i++)
+    {
+        string str = StringUtils::format("Layer 1_sprite_0%01d.png", i);
+        //animFrames.pushBack(spritecache->getSpriteFrameByName(str));
+        SpriteFrame* frame = spritecache->getSpriteFrameByName(str);
+        animFrames.pushBack(frame);
+       
+    }
+    return animFrames;
+}
 

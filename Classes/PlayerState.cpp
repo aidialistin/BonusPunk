@@ -71,14 +71,18 @@ void WalkLeft::handleInput(Player* player, Input input)
 
 void WalkLeft::handleUpdate(Player* player, float dt)
 {
+    //player->runAction(Animate::create(player->walkLeftAnimation));
     static const float maxLeft = 0;
     float currentX = player->getPositionX();
     float newX = currentX - 3;
     
-    if (newX >= maxLeft)
+    if (newX >= maxLeft){
         player->setPositionX(newX);
-    else
+    }
+    else {
         player->setPositionX(maxLeft);
+    }
+    
 }
 
 
@@ -251,7 +255,7 @@ void Reload::handleInput(Player* player, Input input)
 
 void Reload::handleUpdate(Player* player, float dt)
 {
-
+    player->setState(&PlayerState::idling);
 }
 
 
