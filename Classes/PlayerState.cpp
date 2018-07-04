@@ -210,7 +210,6 @@ void Shoot::handleInput(Player* player, Input input)
 	case SHOOT_PRESS:
 		break;
 	case SHOOT_RELEASE:
-		
 		player->setState(&PlayerState::reloading);
 		break;
 	default:
@@ -220,7 +219,7 @@ void Shoot::handleInput(Player* player, Input input)
 
 void Shoot::handleUpdate(Player* player, float dt)
 {
-
+    player->shoot();
 }
 
 
@@ -240,6 +239,7 @@ void Reload::handleInput(Player* player, Input input)
 		break;
 	case RIGHT_PRESS:
 		player->setState(&PlayerState::goingRight);
+        player->scheduleUpdate();
 		break;
 	case RIGHT_RELEASE:
 		break;
@@ -248,8 +248,10 @@ void Reload::handleInput(Player* player, Input input)
 	}
 }
 
+
 void Reload::handleUpdate(Player* player, float dt)
 {
 
 }
+
 

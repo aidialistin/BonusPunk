@@ -42,7 +42,9 @@ void Player::input(Input input)
 
 void Player::update(float dt)
 {
-	_state->handleUpdate(this, dt);
+    _state->handleUpdate(this, dt);
+    //auto mouseListener =  cocos2d::EventListenerMouse::create();
+    //mouseListener->onMouseMove = CC_CALLBACK_1(Player::onMouseMove, this);
 }
 /*
 void Player::update(float dt, bool colliion)
@@ -50,3 +52,26 @@ void Player::update(float dt, bool colliion)
 	_state->handleUpdate(this, dt, collision);
 }
 */
+
+void Player::shoot(){
+    auto mouseListener =  cocos2d::EventListenerMouse::create();
+    mouseListener->onMouseMove = CC_CALLBACK_1(Player::onMouseMove, this);
+    auto bullet = create("close24.png");
+    bullet->setPosition(100,100);
+    this->addChild(bullet);
+    cocos2d::Point b = cocos2d::Point(200, 100);
+    auto moveTo = cocos2d::MoveTo::create(1.0f, b);
+    auto delay = cocos2d::DelayTime::create( 0.1f );
+    auto remove = cocos2d::CallFunc::create( [bullet](){bullet->removeFromParent();});
+    auto action1 = cocos2d::Sequence::create(moveTo, delay, remove, nullptr );
+    bullet->runAction(action1);
+
+}
+
+void Player::onMouseMove(cocos2d::Event *event)
+{
+    CCLOG("moving");
+    /*cocos2d::EventMouse* e = (EventMouse*)event;
+    std::string str = "MousePosition X:";
+    str = str + tostr(e->getCursorX()) + " Y:" + tostr(e->getCursorY());*/
+}

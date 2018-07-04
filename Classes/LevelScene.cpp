@@ -63,11 +63,11 @@ bool LevelScene::init()
     menuItem ->setPosition(Point(size.width / 4, (size.height -50)));
     
     if (i == 1) {
-       // background = Sprite::create("res/images/testbackground.PNG");
-        _tileMap = new CCTMXTiledMap();
-        _tileMap->initWithTMXFile("res/images/deine_mama.tmx");
-        _background = _tileMap->layerNamed("Kachelebene1");
-        this->addChild(_tileMap);
+        background = Sprite::create("res/images/testbackground.PNG");
+       // _tileMap = new CCTMXTiledMap();
+        //_tileMap->initWithTMXFile("res/images/deine_mama.tmx");
+        //_background = _tileMap->layerNamed("Kachelebene1");
+        //this->addChild(_tileMap);
     } else if (i == 2){
         background = Sprite::create("res/images/background_2.jpg");
     } else if (i == 3) {
@@ -79,9 +79,9 @@ bool LevelScene::init()
     this->addChild(menuBtn);
 
     
-   // background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
-    //background->setPosition(size.width/2, size.height/2);
-    //this->addChild(background);    // add a background sprite to watch more obviously
+    background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
+    background->setPosition(size.width/2, size.height/2);
+    this->addChild(background);    // add a background sprite to watch more obviously
     
     labelTime = Label::createWithTTF(countDown.timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)

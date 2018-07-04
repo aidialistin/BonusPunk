@@ -80,5 +80,6 @@ public:
 	void handleUpdate(Player* player, float dt);
 };
 
+
 #endif // __PLAYER_STATE_H__
 

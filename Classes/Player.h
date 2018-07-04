@@ -24,9 +24,11 @@ public:
 	static Player* create(const std::string& filename);
 	const PlayerState* getState() const;
 	const char* getStateName()const;
+    int reloadTime;
 
 	void input(Input input);
 	void update(float dt) override;
+    void reloadUpdate(float dt);
 //	void collision(bool b) override;
 
 protected:
@@ -36,6 +38,8 @@ protected:
 private:
    
 	PlayerState* _state;
+    void shoot();
+    void onMouseMove(cocos2d::Event* event);
 
 };
 #endif // __PLAYER_H_
