@@ -58,8 +58,17 @@ void Player::updatePlayer(float dt)
 void Player::shoot(){
     if (shootAllowed){
         auto bullet = create("close24.png");
-        bullet->setPosition(100,100);
-        this->addChild(bullet);
+        bullet->setPosition(100, 100);
+        
+        auto bulletBody = cocos2d::PhysicsBody::createBox( bullet->getContentSize());
+        bullet->setPhysicsBody( bulletBody );
+        bulletBody-> setRotationEnable(false);
+        
+        // Für Collision
+        bulletBody->setCollisionBitmask(2);
+        bulletBody->setContactTestBitmask(true);
+        
+        this->addChild(bullet, 0);
         //cocos2d::Point a = cocos2d::Point(300, 100);
         auto moveTo = cocos2d::MoveTo::create(1.0f, _target);
         auto delay = cocos2d::DelayTime::create( 0.1f );
