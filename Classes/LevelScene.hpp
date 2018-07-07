@@ -30,7 +30,7 @@ public:
     virtual bool init() override;
     
     void startGame();
-    
+    void stopMusic(float dt);
 };
 
 #endif /* LevelScene_hpp */

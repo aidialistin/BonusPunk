@@ -7,6 +7,7 @@
 
 #include "LevelScene.hpp"
 #include "CountDown.hpp"
+#include "SimpleAudioEngine.h"
 
 
 
@@ -66,6 +67,9 @@ bool LevelScene::init()
     }
     
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/beat.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/beat.mp3",true);//true loops
+    this->schedule(schedule_selector(LevelScene::stopMusic), 1);// seconds after to stop 
     return true;
 }
 
@@ -75,4 +79,6 @@ void LevelScene::update(float dt){
 }
 
 
-
+void LevelScene::stopMusic(float dt){
+    CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("res/audio/beat.mp3");
+}
