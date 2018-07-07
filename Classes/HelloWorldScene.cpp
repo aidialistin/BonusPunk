@@ -57,17 +57,20 @@ bool HelloWorld::init()
     auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
     this->addChild(bGColor);
 
+<<<<<<< HEAD
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/beat.mp3");
     CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/beat.mp3",true);//true loops
     
+=======
+>>>>>>> master
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player_plist.plist");
+    /*SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player_plist.plist");
    
-   /* auto background = Sprite::createWithSpriteFrameName("res/images/testbackground.png");
+    auto background = Sprite::createWithSpriteFrameName("res/images/testbackground.png");
     background->setPosition(origin.x + 200,origin.y + 200/2);
-    this->addChild(background);*/
+    this->addChild(background);
     //Vector<SpriteFrame*>  frames = getAnimation("res/images/Layer 1_sprite_%01d.png", 8);
     auto frames = getAnimation("Layer 1_sprite_0%01d.png", 8);
     auto sprite = Sprite::createWithSpriteFrame(frames.front());
@@ -78,12 +81,12 @@ bool HelloWorld::init()
     sprite->runAction(RepeatForever::create(Animate::create(animation)));
 
 
-  mySprite = Sprite::create("res/images/player_plist.png");
+    mySprite = Sprite::create("res/images/player_plist.png");
     
     mySprite->setPosition(Point((visibleSize.width/2) + origin.x, (visibleSize.height/2) + origin.y));
     auto action=MoveBy::create(3,Point(100,10));
     mySprite->runAction(EaseBounceIn::create(action));
-    this->addChild(mySprite);
+    this->addChild(mySprite); */
     
 
     auto start = Label::createWithSystemFont("Start", "Arial", 30.0);
@@ -94,7 +97,8 @@ bool HelloWorld::init()
     auto level2MenuItem = MenuItemLabel::create(level2, CC_CALLBACK_1(HelloWorld::levelAdd, this));
     auto level3MenuItem = MenuItemLabel::create(level3, CC_CALLBACK_1(HelloWorld::levelDrei, this));
     auto level4MenuItem = MenuItemLabel::create(level1, CC_CALLBACK_1(HelloWorld::levelEins, this));
-    
+
+	// Menü-Label Positionen    
     startMenuItem ->setPosition(Point(visibleSize.width / 2, (visibleSize.height / 4-10) * 3));
     level2MenuItem->setPosition(Point(visibleSize.width / 2 , (visibleSize.height / 2)));
     level3MenuItem->setPosition(Point(visibleSize.width / 2 + 100, (visibleSize.height / 2)));
@@ -130,6 +134,7 @@ bool HelloWorld::init()
     // 3. add your codes below...
 
 
+
     // add a label shows "Hello World"
     // create and initialize a label
 
@@ -158,20 +163,23 @@ void HelloWorld::Play(cocos2d::Ref *pSender)
     CCLOG("Play");
 }
 
-void HelloWorld::levelAdd(cocos2d::Ref *pSender)
-{
-    CCLOG("level2");
-}
-
 void HelloWorld::levelDrei(cocos2d::Ref *pSender)
 {
-    CCLOG("Level3");
+    auto scene = LevelScene::createScene(3);
+    Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
 }
+
+void HelloWorld::levelAdd(cocos2d::Ref *pSender)
+{
+    auto scene = LevelScene::createScene(2);
+    Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
+}
+
 void HelloWorld::levelEins(cocos2d::Ref *pSender)
 {
-    auto scene = LevelScene::createScene();
+    //auto scene = Scene::create();
+    auto scene = LevelScene::createScene(1);
     Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
-    
 }
 
 
@@ -229,5 +237,4 @@ Vector<SpriteFrame*> HelloWorld::getAnimation(const char * format, int count)
     }
     return animFrames;
 }
-
 

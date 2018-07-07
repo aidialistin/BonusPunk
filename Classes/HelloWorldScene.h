@@ -26,6 +26,8 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "Player.h"
+#include "enums.h"
 #include "CountDown.hpp"
 #include <string>
 using namespace std;

@@ -13,7 +13,7 @@
 using namespace std;
 
 CountDown::CountDown(){
-    timeRemaining = 5;
+    timeRemaining = 50;
     min = ceil(timeRemaining / 60);
     sec = timeRemaining % 60;
     if (sec < 10){
