@@ -62,7 +62,7 @@ bool LevelScene::init()
     auto menuItem = MenuItemLabel::create(menu, CC_CALLBACK_1(LevelScene::goToMenu, this));
     menuItem ->setPosition(Point(size.width / 4, (size.height -50)));
     
-    if (i == 1) {
+ if (i == 1) {
        // background = Sprite::create("res/images/testbackground.PNG");
         _tileMap = new CCTMXTiledMap();
         _tileMap->initWithTMXFile("res/images/deine_mama.tmx");
