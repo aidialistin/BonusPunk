@@ -27,7 +27,7 @@
 #include "CountDown.hpp"
 #include "LevelScene.hpp"
 #include <vector>
-
+#include "SimpleAudioEngine.h"
 #include <string>
 using namespace std;
 using namespace cocos2d;
@@ -57,6 +57,8 @@ bool HelloWorld::init()
     auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
     this->addChild(bGColor);
 
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/beat.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/beat.mp3",true);//true loops
     
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
