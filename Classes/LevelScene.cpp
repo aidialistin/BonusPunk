@@ -128,7 +128,12 @@ void LevelScene::update(float dt){
 
 void LevelScene::playerUpdate(float dt)
 {
-    _player->update(dt);
+	_player->update(dt, false);
+}
+
+void LevelScene::playerUpdate(float dt, bool collision)
+{
+	_player->update(dt, collision);
 }
 
 bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
@@ -139,6 +144,7 @@ bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
 	//check for Collision
 	if ((1 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask() ) || (2 == a->getCollisionBitmask() && 1 == b->getCollisionBitmask() ) )
 	{
+		_player->update(0, true);
 		return true;
 	}
 	else {

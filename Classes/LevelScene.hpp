@@ -29,6 +29,7 @@ public:
     static cocos2d::Scene* createScene(int level);
     virtual void update(float dt) override;
     void playerUpdate(float dt);
+	void playerUpdate(float dt, bool collision);
     CREATE_FUNC(LevelScene);
     
     virtual bool init() override;

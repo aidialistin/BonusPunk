@@ -26,7 +26,8 @@ public:
 	const char* getStateName()const;
 
 	void input(Input input);
-	void update(float dt) override;
+//	void update(float dt) override;
+	void update(float dt, bool collision);
 //	void collision(bool b) override;
 
 protected:

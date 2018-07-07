@@ -39,14 +39,14 @@ void Player::input(Input input)
 {
 	_state->handleInput(this, input);
 }
-
+/*
 void Player::update(float dt)
 {
 	_state->handleUpdate(this, dt);
 }
-/*
-void Player::update(float dt, bool colliion)
+*/
+
+void Player::update(float dt, bool collision)
 {
 	_state->handleUpdate(this, dt, collision);
 }
-*/
