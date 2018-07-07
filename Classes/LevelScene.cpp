@@ -7,14 +7,14 @@
 
 #include "LevelScene.hpp"
 #include "CountDown.hpp"
-<<<<<<< HEAD
+
 #include "SimpleAudioEngine.h"
-=======
+
 #include "HelloWorldScene.h"
 #include <string>
 using namespace std;
 USING_NS_CC;
->>>>>>> master
+
 
 int i;
 
@@ -63,13 +63,20 @@ bool LevelScene::init()
 //	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player.png");
 
     if (i == 1) {
-        background = Sprite::create("res/images/testbackground.PNG");
+        background = Sprite::create("res/images/background_1.png");
+        CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/level1.m4a");
+        CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/level1.m4a",true);//true loops
+        this->schedule(schedule_selector(LevelScene::stopMusic), 1);// seconds after to stop
+
        // _tileMap = new CCTMXTiledMap();
         //_tileMap->initWithTMXFile("res/images/deine_mama.tmx");
         //_background = _tileMap->layerNamed("Kachelebene1");
         //this->addChild(_tileMap);
     } else if (i == 2){
         background = Sprite::create("res/images/background_2.jpg");
+        CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/lachen.m4a");
+        CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/lachen.m4a",true);//true loops
+        
     } else if (i == 3) {
         background = Sprite::create("res/images/background_3.jpg");
     }
@@ -101,11 +108,8 @@ bool LevelScene::init()
     }
     
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
-<<<<<<< HEAD
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/beat.mp3");
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/beat.mp3",true);//true loops
-    this->schedule(schedule_selector(LevelScene::stopMusic), 1);// seconds after to stop 
-=======
+
+
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::playerUpdate));
 
 // Physics-Teil 
@@ -156,8 +160,55 @@ bool LevelScene::init()
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(LevelScene::onContactBegin, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
->>>>>>> master
-    return true;
+    // score
+    score=0;
+ 
+    
+   //  int randomX = arc4random() % 600 + 1;
+   //  int randomY = arc4random() % 300 + 1;
+    
+    auto myHussi = Sprite::create("res/images/hussi.png");
+    // auto spritebody =   PhysicsBody::createCircle(seq->getContentSize().width/2,PhysicsMaterial(0,1,0));
+    myHussi->setPosition(Point(15,400));
+    auto moveBy = MoveBy::create(3, Vec2(412,10));//MoveBy::create(5, Vec2(12,40));
+    auto delay = DelayTime::create(1);
+    auto moveTo = MoveTo::create(3, Vec2(1212,400));
+    auto seq = Sequence::create(moveBy, delay, moveTo, nullptr);
+ 
+    auto seqBack =moveBy->reverse();
+    auto scaleBy = ScaleBy::create(1.5f, 1.5f, 1.0f);
+    
+    auto moveBy2 = MoveTo::create(3, Vec2(15,100));//MoveBy::create(5, Vec2(12,40));
+    auto delay2 = DelayTime::create(1);
+    auto moveTo2 = MoveTo::create(3, Vec2(15,100));
+    auto seq2 = Sequence::create(moveBy2, delay2, moveTo2, nullptr);
+    auto rotateTo2 = RotateTo::create(5.0f, 1.0f);
+    
+    
+    
+    myHussi->runAction(seq);
+   
+    myHussi->runAction(scaleBy);
+    auto rotateTo = RotateTo::create(1.0f, 5.0f);
+    myHussi->runAction(rotateTo);
+     myHussi->runAction(seq2);
+    
+    auto myHussi2 = Sprite::create("res/images/hussi.png");
+    // auto spritebody =   PhysicsBody::createCircle(seq->getContentSize().width/2,PhysicsMaterial(0,1,0));
+    myHussi2->setPosition(Point(1215,100));
+    
+    myHussi2->runAction(RepeatForever::create(seq2));
+    myHussi2->runAction(scaleBy);
+    myHussi2->runAction(rotateTo2);
+ myHussi2->runAction(seqBack);
+    
+    this->addChild(myHussi2);
+    
+       this->addChild(myHussi);
+    
+    
+   
+       return true;
 }
 
 void LevelScene::update(float dt){

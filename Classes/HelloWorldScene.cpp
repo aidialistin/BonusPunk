@@ -57,12 +57,11 @@ bool HelloWorld::init()
     auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
     this->addChild(bGColor);
 
-<<<<<<< HEAD
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/beat.mp3");
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/beat.mp3",true);//true loops
+
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/doorbell.mp3");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/doorbell.mp3",true);//true loops
     
-=======
->>>>>>> master
+
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
