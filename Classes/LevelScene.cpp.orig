@@ -57,6 +57,19 @@ bool LevelScene::init()
     auto background = Sprite::create("");
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 //	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player.png");
+<<<<<<< HEAD
+    
+    auto menu = Label::createWithSystemFont("Zum Menü", "Arial", 24.0);
+    auto menuItem = MenuItemLabel::create(menu, CC_CALLBACK_1(LevelScene::goToMenu, this));
+    menuItem ->setPosition(Point(size.width / 4, (size.height -50)));
+    
+ if (i == 1) {
+       // background = Sprite::create("res/images/testbackground.PNG");
+        _tileMap = new CCTMXTiledMap();
+        _tileMap->initWithTMXFile("res/images/deine_mama.tmx");
+        _background = _tileMap->layerNamed("Kachelebene1");
+        this->addChild(_tileMap);
+=======
 
     if (i == 1) {
         background = Sprite::create("res/images/testbackground.PNG");
@@ -64,6 +77,7 @@ bool LevelScene::init()
         //_tileMap->initWithTMXFile("res/images/deine_mama.tmx");
         //_background = _tileMap->layerNamed("Kachelebene1");
         //this->addChild(_tileMap);
+>>>>>>> c99e89fd4a168073dbad4e08efe33094b415c042
     } else if (i == 2){
         background = Sprite::create("res/images/background_2.jpg");
     } else if (i == 3) {
