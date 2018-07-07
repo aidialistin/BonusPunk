@@ -57,11 +57,7 @@ bool LevelScene::init()
     auto background = Sprite::create("");
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 //	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player.png");
-    
-    auto menu = Label::createWithSystemFont("Zum Menü", "Arial", 24.0);
-    auto menuItem = MenuItemLabel::create(menu, CC_CALLBACK_1(LevelScene::goToMenu, this));
-    menuItem ->setPosition(Point(size.width / 4, (size.height -50)));
-    
+
     if (i == 1) {
         background = Sprite::create("res/images/testbackground.PNG");
        // _tileMap = new CCTMXTiledMap();
@@ -73,15 +69,18 @@ bool LevelScene::init()
     } else if (i == 3) {
         background = Sprite::create("res/images/background_3.jpg");
     }
+
+    background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
+    background->setPosition(size.width/2, size.height/2);
+    this->addChild(background);    // add a background sprite to watch more obviously
+    
+    auto menu = Label::createWithSystemFont("Zum Menü", "Arial", 24.0);
+    auto menuItem = MenuItemLabel::create(menu, CC_CALLBACK_1(LevelScene::goToMenu, this));
+    menuItem ->setPosition(Point(size.width / 4, (size.height -50)));
     
     auto menuBtn = Menu::createWithItem(menuItem);
     menuBtn->setPosition(Point(0, 0));
     this->addChild(menuBtn);
-
-    
-    background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
-    background->setPosition(size.width/2, size.height/2);
-    this->addChild(background);    // add a background sprite to watch more obviously
     
     labelTime = Label::createWithTTF(countDown.timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
