@@ -37,6 +37,7 @@ void Idle::handleInput(Player* player, Input input)
 	default:
 		break;
 	}
+    //player->playAnimation();
 }
 
 void Idle::handleUpdate(Player* player, float dt)
@@ -67,16 +68,18 @@ void WalkLeft::handleInput(Player* player, Input input)
 	default:
 		break;
 	}
+    //player->playAnimation();
 }
 
 void WalkLeft::handleUpdate(Player* player, float dt)
 {
-    //player->runAction(Animate::create(player->walkLeftAnimation));
+    
     static const float maxLeft = 0;
     float currentX = player->getPositionX();
     float newX = currentX - 3;
     
     if (newX >= maxLeft){
+        
         player->setPositionX(newX);
     }
     else {
@@ -108,6 +111,7 @@ void WalkRight::handleInput(Player* player, Input input)
 	default:
 		break;
 	}
+    ////player->playAnimation();
 }
 
 void WalkRight::handleUpdate(Player* player, float dt)
@@ -116,7 +120,11 @@ void WalkRight::handleUpdate(Player* player, float dt)
     float currentX = player->getPositionX();
     float newX = currentX + 3;
     
-    if (newX <= maxRight) player->setPositionX(newX);
+    if (newX <= maxRight)
+    {
+        player->setPositionX(newX);
+    }
+   
     else
         player->setPositionX(maxRight);
 }
@@ -150,6 +158,7 @@ void Jump::handleInput(Player* player, Input input)
 	default:
 		break;
 	}
+   // //player->playAnimation();
 }
 
 void Jump::handleUpdate(Player* player, float dt)
@@ -185,6 +194,7 @@ void Fall::handleInput(Player* player, Input input)
 	default:
 		break;
 	}
+    //player->playAnimation();
 }
 
 void Fall::handleUpdate(Player* player, float dt)
@@ -219,6 +229,7 @@ void Shoot::handleInput(Player* player, Input input)
 	default:
 		break;
 	}
+   // //player->playAnimation();
 }
 
 void Shoot::handleUpdate(Player* player, float dt)
@@ -250,6 +261,7 @@ void Reload::handleInput(Player* player, Input input)
 	default:
 		break;
 	}
+    //player->playAnimation();
 }
 
 

@@ -4,7 +4,7 @@
 <dict>
 	<key>frames</key>
 	<dict>
-		<key>Layer 1_sprite_01.png</key>
+		<key>Player_01.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -21,7 +21,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_02.png</key>
+		<key>Player_02.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -38,7 +38,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_03.png</key>
+		<key>Player_03.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -55,7 +55,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_04.png</key>
+		<key>Player_04.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -72,7 +72,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_05.png</key>
+		<key>Player_05.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -89,7 +89,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_06.png</key>
+		<key>Player_06.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -106,7 +106,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_07.png</key>
+		<key>Player_07.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -123,7 +123,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_08.png</key>
+		<key>Player_08.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -140,7 +140,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_09.png</key>
+		<key>Player_09.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -157,7 +157,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_10.png</key>
+		<key>Player_010.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -174,7 +174,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_11.png</key>
+		<key>Player_011.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -191,7 +191,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_12.png</key>
+		<key>Player_012.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
@@ -208,7 +208,7 @@
 			<key>textureRotated</key>
 			<false/>
 		</dict>
-		<key>Layer 1_sprite_13.png</key>
+		<key>Player_013.png</key>
 		<dict>
 			<key>aliases</key>
 			<array/>
