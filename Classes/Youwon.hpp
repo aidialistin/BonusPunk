@@ -1,18 +1,23 @@
 //
-//  GameOver.hpp
+//  Youwon.hpp
 //  MyCppGame
 //
-//  Created by Lale Kaya on 27.06.18.
+//  Created by Aida Bakhtiari on 10.07.18.
 //
 
-#ifndef GameOver_hpp
-#define GameOver_hpp
+#ifndef Youwon_hpp
+#define Youwon_hpp
+
+#include <stdio.h>
+#endif /* Youwon_hpp */
+
+
 #include "cocos2d.h"
 #include <stdio.h>
 
 using namespace std;
 
-class GameOver : public cocos2d::Scene
+class Youwon : public cocos2d::Scene
 {
 public:
     
@@ -25,9 +30,9 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
     
     // implement the "static create()" method manually
-    CREATE_FUNC(GameOver);
+    CREATE_FUNC(Youwon);
     cocos2d::Sprite *mySprite;
-
+    
     void goToMenu(Ref *pSender);
 };
-#endif /* GameOver_hpp */
+

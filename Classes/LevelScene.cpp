@@ -324,6 +324,4 @@ Vector<SpriteFrame*> LevelScene::getAnimation(const char * format, int count, in
     return animFrames;
 }
 
-void LevelScene::stopMusic(float dt){
-    CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("res/audio/beat.mp3");
-}
+

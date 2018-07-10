@@ -54,6 +54,8 @@
 		BD95FA7E20F4F84700000D1F /* CountDown.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD95FA7320F4F84600000D1F /* CountDown.cpp */; };
 		BD95FA7F20F4F84700000D1F /* Target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD95FA7520F4F84600000D1F /* Target.cpp */; };
 		BD95FA8020F4F84700000D1F /* Target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD95FA7520F4F84600000D1F /* Target.cpp */; };
+		BD95FA8320F51BC600000D1F /* Youwon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD95FA8120F51BC600000D1F /* Youwon.cpp */; };
+		BD95FA8420F51BC600000D1F /* Youwon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD95FA8120F51BC600000D1F /* Youwon.cpp */; };
 		BDBC7E0D20DFE37A00B29CE2 /* close24.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBC7E0C20DFE37A00B29CE2 /* close24.png */; };
 		BDBC7E0E20DFE37A00B29CE2 /* close24.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBC7E0C20DFE37A00B29CE2 /* close24.png */; };
 		BDBC7E1820DFE75700B29CE2 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBC7E1720DFE75700B29CE2 /* close.png */; };
@@ -157,6 +159,8 @@
 		BD95FA7620F4F84600000D1F /* Bullet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
 		BD95FA7720F4F84600000D1F /* Target.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Target.hpp; sourceTree = "<group>"; };
 		BD95FA7820F4F84700000D1F /* CountDown.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CountDown.hpp; sourceTree = "<group>"; };
+		BD95FA8120F51BC600000D1F /* Youwon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Youwon.cpp; sourceTree = "<group>"; };
+		BD95FA8220F51BC600000D1F /* Youwon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Youwon.hpp; sourceTree = "<group>"; };
 		BDBC7E0C20DFE37A00B29CE2 /* close24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close24.png; sourceTree = "<group>"; };
 		BDBC7E1720DFE75700B29CE2 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -325,6 +329,8 @@
 				83DB8D7D20E404590074C43D /* GameOver.hpp */,
 				BD63562620EF7E710086CF4E /* PlayerState.cpp */,
 				BD63562320EF7E710086CF4E /* PlayerState.h */,
+				BD95FA8120F51BC600000D1F /* Youwon.cpp */,
+				BD95FA8220F51BC600000D1F /* Youwon.hpp */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -485,6 +491,7 @@
 				BD95FA7920F4F84700000D1F /* Bullet.cpp in Sources */,
 				BD95FA7F20F4F84700000D1F /* Target.cpp in Sources */,
 				BD95FA6D20F4F83900000D1F /* GameOver.cpp in Sources */,
+				BD95FA8320F51BC600000D1F /* Youwon.cpp in Sources */,
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
 				BD95FA7D20F4F84700000D1F /* CountDown.cpp in Sources */,
 				BD95FA7B20F4F84700000D1F /* Player.cpp in Sources */,
@@ -500,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD95FA8420F51BC600000D1F /* Youwon.cpp in Sources */,
 				BD95FA7C20F4F84700000D1F /* Player.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				BD95FA8020F4F84700000D1F /* Target.cpp in Sources */,
