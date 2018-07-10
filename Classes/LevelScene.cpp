@@ -195,12 +195,12 @@ bool LevelScene::init()
     // score
     score=0;
  
-    
    //  int randomX = arc4random() % 600 + 1;
    //  int randomY = arc4random() % 300 + 1;
     
     auto myHussi = Sprite::create("res/images/hussi.png");
-    // auto spritebody =   PhysicsBody::createCircle(seq->getContentSize().width/2,PhysicsMaterial(0,1,0));
+    auto spritebody = PhysicsBody::createCircle(myHussi->getContentSize().width/2,PhysicsMaterial(0,1,0));
+    myHussi->setPhysicsBody(spritebody);
     myHussi->setPosition(Point(15,400));
     auto moveBy = MoveBy::create(3, Vec2(412,10));//MoveBy::create(5, Vec2(12,40));
     auto delay = DelayTime::create(1);
@@ -216,8 +216,6 @@ bool LevelScene::init()
     auto seq2 = Sequence::create(moveBy2, delay2, moveTo2, nullptr);
     auto rotateTo2 = RotateTo::create(5.0f, 1.0f);
     
-    
-    
     myHussi->runAction(seq);
    
     myHussi->runAction(scaleBy);
@@ -232,11 +230,11 @@ bool LevelScene::init()
     myHussi2->runAction(RepeatForever::create(seq2));
     myHussi2->runAction(scaleBy);
     myHussi2->runAction(rotateTo2);
- myHussi2->runAction(seqBack);
+    myHussi2->runAction(seqBack);
     
     this->addChild(myHussi2);
     
-       this->addChild(myHussi);
+    this->addChild(myHussi);
     
     
    
