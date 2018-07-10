@@ -32,13 +32,14 @@ public:
     CREATE_FUNC(LevelScene);
     
     virtual bool init() override;
-    Vector<SpriteFrame*> getAnimation(const char *format, int count);
+    Vector<SpriteFrame*> getAnimation(const char *format, int count, int i);
     void startGame();
 
 private:
     CCTMXTiledMap *_tileMap;
     CCTMXLayer *_background;
 	Player* _player;
+    Player* _player2;
 	void initKeyboard();
     void onMouseMove(cocos2d::Event *event);
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);

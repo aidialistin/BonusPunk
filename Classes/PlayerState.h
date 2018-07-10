@@ -78,7 +78,6 @@ class Reload : public PlayerState
 public:
 	void handleInput(Player* player, Input input);
 	void handleUpdate(Player* player, float dt);
-    void changeState(Player* player);
 };
 
 

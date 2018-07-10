@@ -56,8 +56,8 @@ bool LevelScene::init()
     auto size = Director::getInstance()->getWinSize();
     auto background = Sprite::create("");
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-//	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player.png");
-
+    
+    
     if (i == 1) {
         background = Sprite::create("res/images/testbackground.PNG");
        // _tileMap = new CCTMXTiledMap();
@@ -69,10 +69,10 @@ bool LevelScene::init()
     } else if (i == 3) {
         background = Sprite::create("res/images/background_3.jpg");
     }
-
+    
     background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
     background->setPosition(size.width/2, size.height/2);
-    this->addChild(background);    // add a background sprite to watch more obviously
+    this->addChild(background); // add a background sprite to watch more obviously
     
     auto menu = Label::createWithSystemFont("Zum Menü", "Arial", 24.0);
     auto menuItem = MenuItemLabel::create(menu, CC_CALLBACK_1(LevelScene::goToMenu, this));
@@ -81,6 +81,14 @@ bool LevelScene::init()
     auto menuBtn = Menu::createWithItem(menuItem);
     menuBtn->setPosition(Point(0, 0));
     this->addChild(menuBtn);
+    
+    auto toMenu = Label::createWithSystemFont("Zum Menü", "Arial", 24.0);
+    auto toMenuItem = MenuItemLabel::create(toMenu, CC_CALLBACK_1(LevelScene::goToMenu, this));
+    menuItem ->setPosition(Point(size.width / 4, (size.height -50)));
+    
+    auto toMenuBtn = Menu::createWithItem(toMenuItem);
+    toMenuBtn->setPosition(Point(0, 0));
+    this->addChild(toMenuBtn);
     
     labelTime = Label::createWithTTF(countDown.timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
@@ -114,34 +122,58 @@ bool LevelScene::init()
 //	Player
     
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player_plist.plist");
-    auto frames = getAnimation("Layer 1_sprite_0%01d.png", 5);
-    auto framesRight = getAnimation("Layer 1_sprite_0%01d.png", 5);
-    auto framesLeft = getAnimation("Layer 1_sprite_0%01d.png", 3);
+    auto frames = getAnimation("Player_0%01d.png", 12, 1);
+    auto frame = getAnimation("Player_0%01d.png", 1, 1);
+    auto framesRight = getAnimation("Player_0%01d.png", 5, 1);
+    auto framesLeft = getAnimation("Player_0%01d.png", 10, 6);
+    
     _player = Player::createWithSpriteFrame(frames.front());
     _player->setAnchorPoint(Vec2::ZERO);
     _player->setPosition(Vec2(size.width/2 + origin.x, origin.y+200));
+    
+    _player->idleAnimation = Animation::createWithSpriteFrames(frame, 1.0f/8);
     _player->walkLeftAnimation = Animation::createWithSpriteFrames(framesLeft, 1.0f/8);
     _player->walkRightAnimation = Animation::createWithSpriteFrames(framesRight, 1.0f/8);
-    //_player->runAction(RepeatForever::create(Animate::create(_player->walkLeftAnimation)));
+   /* _player->runAction(RepeatForever::create(Animate::create(_player->walkRightAnimation)));
+    _player->runAction(RepeatForever::create(Animate::create(_player->walkLeftAnimation)));
+    _player->runAction(RepeatForever::create(Animate::create(_player->idleAnimation)));*/
     
-    /*_player = Player::create("res/images/player_plist.png");
-    _player->setPosition(Point((size.width/2) + origin.x, (size.height/2) + origin.y));
-    auto action=MoveBy::create(3,Point(100,10));
-    _player->runAction(EaseBounceIn::create(action));
-    this->addChild(_player);
-	_player = Player::create("res/images/ourGuy.png");
-	_player->setAnchorPoint(Vec2::ZERO);
-	_player->setPosition(Vec2(size.width/2 + origin.x, origin.y));*/
+    _player->idleAnim = RepeatForever::create(Animate::create(_player->idleAnimation));
+    _player->leftAnim = RepeatForever::create(Animate::create(_player->walkLeftAnimation));
+    _player->rightAnim = RepeatForever::create(Animate::create(_player->walkRightAnimation));
+    _player->idleAnim->setTag(1);
+    _player->leftAnim->setTag(1);
+    _player->rightAnim->setTag(1);
+    _player->runAction(_player->leftAnim);
+    _player->runAction(_player->rightAnim);
+    _player->runAction(_player->idleAnim);
 
-	auto spriteRectBody = PhysicsBody::createBox( _player->getContentSize( ), PhysicsMaterial( 0, 0, 0));
+    
+   // _player->playAnimation(_player->walkRightAnimation);
+   // _player->playAnimation(_player->idleAnimation);
+    this->addChild(_player, 0);
+    
+   // _player2 = Player::createWithSpriteFrame(frames.front());
+   // _player2->setAnchorPoint(Vec2::ZERO);
+   // _player2->setPosition(Vec2(20, origin.y));
+   
+	auto spriteRectBody = PhysicsBody::createBox(_player->getContentSize(), PhysicsMaterial( 0, 1, 0));
+    spriteRectBody-> setRotationEnable(false);
+   // auto spriteRectBody2 = PhysicsBody::createBox(_player2->getContentSize(), PhysicsMaterial( 0, 1, 0));
+   // spriteRectBody2-> setRotationEnable(false);
 	_player->setPhysicsBody( spriteRectBody );
-	spriteRectBody-> setRotationEnable(false);
-
+    //_player2->setPhysicsBody( spriteRectBody2 );
+   
 	// Für Collision
 	spriteRectBody->setCollisionBitmask(2);
 	spriteRectBody->setContactTestBitmask(true);
+   // spriteRectBody->setCategoryBitmask(0);
+  //  spriteRectBody2->setCollisionBitmask(3);
+    //spriteRectBody2->setContactTestBitmask(true);
+    //spriteRectBody2->setCategoryBitmask(1);
 
-	this->addChild(_player, 0);
+	//this->addChild(_player, 0);
+  //  this->addChild(_player2, 0);
 	this->initKeyboard();
 
 	auto contactListener = EventListenerPhysicsContact::create();
@@ -158,6 +190,7 @@ void LevelScene::update(float dt){
 void LevelScene::playerUpdate(float dt)
 {
     _player->updatePlayer(dt);
+   // _player2->updatePlayer(dt);
    /* ValueMap properties = _tileMap->getProperties();
     Value collision = properties["Collidable"];
     if (!collision.isNull()) {
@@ -171,11 +204,13 @@ bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
 {
 	PhysicsBody *a = contact.getShapeA()->getBody();
 	PhysicsBody *b = contact.getShapeB()->getBody();
+    PhysicsBody *c = contact.getShapeB()->getBody();
 
 	//check for Collision
-	if ((1 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask() ) || (2 == a->getCollisionBitmask() && 1 == b->getCollisionBitmask() ) )
-	{
-		return true;
+	//if ((1 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask() ) || (2 == a->getCollisionBitmask() && 1 == b->getCollisionBitmask() ) )
+	if ((a->getCollisionBitmask() != b->getCollisionBitmask()) || (a->getCollisionBitmask() != c->getCollisionBitmask()) || (b->getCollisionBitmask() != c->getCollisionBitmask()))
+    {
+        return true;
 	}
 	else {
 		return false;
@@ -196,43 +231,68 @@ void LevelScene::initKeyboard()
 
 void LevelScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event)
 {
-	switch(key)
-	{
-	case cocos2d::EventKeyboard::KeyCode::KEY_A:
-		_player->input(Input::LEFT_PRESS);
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_D:
-		_player->input(Input::RIGHT_PRESS);
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_W:
-		_player->input(Input::JUMP_PRESS);
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
-		_player->input(Input::SHOOT_PRESS);
-		break;
-	default:
-		break;
-	}
+    switch(key)
+    {
+        case cocos2d::EventKeyboard::KeyCode::KEY_A:
+            //_player->runAction(Animate::create(_player->walkLeftAnimation));
+            _player->input(Input::LEFT_PRESS);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_D:
+            _player->input(Input::RIGHT_PRESS);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_W:
+            _player->input(Input::JUMP_PRESS);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+            _player->input(Input::SHOOT_PRESS);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+            _player2->input(Input::LEFT_PRESS);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+            _player2->input(Input::RIGHT_PRESS);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
+            _player2->input(Input::JUMP_PRESS);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_SHIFT:
+            _player2->input(Input::SHOOT_PRESS);
+            break;
+        default:
+            break;
+    }
 }
 
 void LevelScene::onKeyReleased(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event)
 {
 	switch (key)
 	{
-	case cocos2d::EventKeyboard::KeyCode::KEY_A:
-		_player->input(Input::LEFT_RELEASE);
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_D:
-		_player->input(Input::RIGHT_RELEASE);
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_W:
-		_player->input(Input::JUMP_RELEASE);
-		break;
-	case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
-		_player->input(Input::SHOOT_RELEASE);
-		break;
-	default:
-		break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_A:
+            _player->input(Input::LEFT_RELEASE);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_D:
+            _player->input(Input::RIGHT_RELEASE);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_W:
+            _player->input(Input::JUMP_RELEASE);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
+            _player->input(Input::SHOOT_RELEASE);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+            _player2->input(Input::LEFT_RELEASE);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+            _player2->input(Input::RIGHT_RELEASE);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_UP_ARROW:
+            _player2->input(Input::JUMP_RELEASE);
+            break;
+        case cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_SHIFT:
+            _player2->input(Input::SHOOT_RELEASE);
+            break;
+        default:
+            break;
 	}
 }
 
@@ -242,13 +302,13 @@ void LevelScene::goToMenu(cocos2d::Ref *pSender)
     Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
 }
 
-Vector<SpriteFrame*> LevelScene::getAnimation(const char * format, int count)
+Vector<SpriteFrame*> LevelScene::getAnimation(const char * format, int count, int i)
 {
     auto spritecache = SpriteFrameCache::getInstance();
     Vector<SpriteFrame*> animFrames;
-    for(int i = 1; i <= count; i++)
+    for(i; i <= count; i++)
     {
-        string str = StringUtils::format("Layer 1_sprite_0%01d.png", i);
+        string str = StringUtils::format("Player_0%01d.png", i);
         //animFrames.pushBack(spritecache->getSpriteFrameByName(str));
         SpriteFrame* frame = spritecache->getSpriteFrameByName(str);
         animFrames.pushBack(frame);
