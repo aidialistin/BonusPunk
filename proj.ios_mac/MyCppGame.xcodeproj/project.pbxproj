@@ -50,6 +50,8 @@
 		BD63562A20EF7E710086CF4E /* PlayerState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD63562620EF7E710086CF4E /* PlayerState.cpp */; };
 		BD69310D20F4A0E900E36D05 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD69310C20F4A0E900E36D05 /* Bullet.cpp */; };
 		BD69310E20F4A0E900E36D05 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD69310C20F4A0E900E36D05 /* Bullet.cpp */; };
+		BD95FA5A20F4F60000000D1F /* Target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD95FA5920F4F60000000D1F /* Target.cpp */; };
+		BD95FA5B20F4F60000000D1F /* Target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BD95FA5920F4F60000000D1F /* Target.cpp */; };
 		BDA5C7F420E00FFA0035A4C1 /* CountDown.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */; };
 		BDA5C7F520E00FFA0035A4C1 /* CountDown.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */; };
 		BDBC7E0D20DFE37A00B29CE2 /* close24.png in Resources */ = {isa = PBXBuildFile; fileRef = BDBC7E0C20DFE37A00B29CE2 /* close24.png */; };
@@ -151,6 +153,8 @@
 		BD63562620EF7E710086CF4E /* PlayerState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerState.cpp; sourceTree = "<group>"; };
 		BD69310A20F4A0E900E36D05 /* Bullet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bullet.hpp; sourceTree = "<group>"; };
 		BD69310C20F4A0E900E36D05 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		BD95FA5720F4F60000000D1F /* Target.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Target.hpp; sourceTree = "<group>"; };
+		BD95FA5920F4F60000000D1F /* Target.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Target.cpp; sourceTree = "<group>"; };
 		BDA5C7F120E00FFA0035A4C1 /* CountDown.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CountDown.cpp; sourceTree = "<group>"; };
 		BDA5C7F320E00FFA0035A4C1 /* CountDown.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CountDown.hpp; sourceTree = "<group>"; };
 		BDBC7E0C20DFE37A00B29CE2 /* close24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close24.png; sourceTree = "<group>"; };
@@ -317,6 +321,8 @@
 				BD69310C20F4A0E900E36D05 /* Bullet.cpp */,
 				BD69310A20F4A0E900E36D05 /* Bullet.hpp */,
 				BD63562520EF7E710086CF4E /* Player.h */,
+				BD95FA5920F4F60000000D1F /* Target.cpp */,
+				BD95FA5720F4F60000000D1F /* Target.hpp */,
 				BD63562620EF7E710086CF4E /* PlayerState.cpp */,
 				BD63562320EF7E710086CF4E /* PlayerState.h */,
 			);
@@ -477,6 +483,7 @@
 			files = (
 				BD63562920EF7E710086CF4E /* PlayerState.cpp in Sources */,
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
+				BD95FA5A20F4F60000000D1F /* Target.cpp in Sources */,
 				BDA5C7F420E00FFA0035A4C1 /* CountDown.cpp in Sources */,
 				BD63562720EF7E710086CF4E /* Player.cpp in Sources */,
 				83DB8D7820E3DD6A0074C43D /* LevelScene.cpp in Sources */,
@@ -495,6 +502,7 @@
 			files = (
 				46880B8919C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				BD69310E20F4A0E900E36D05 /* Bullet.cpp in Sources */,
+				BD95FA5B20F4F60000000D1F /* Target.cpp in Sources */,
 				BD63562820EF7E710086CF4E /* Player.cpp in Sources */,
 				83DB8D7F20E404590074C43D /* GameOver.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
