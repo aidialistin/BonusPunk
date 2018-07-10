@@ -69,10 +69,6 @@ bool LevelScene::init()
         CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/level1.m4a",true);//true loops
         this->schedule(schedule_selector(LevelScene::stopMusic), 1);// seconds after to stop
 
-       // _tileMap = new CCTMXTiledMap();
-        //_tileMap->initWithTMXFile("res/images/deine_mama.tmx");
-        //_background = _tileMap->layerNamed("Kachelebene1");
-        //this->addChild(_tileMap);
     } else if (i == 2){
         background = Sprite::create("res/images/background_2.jpg");
         CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/lachen.m4a");
@@ -94,14 +90,6 @@ bool LevelScene::init()
     menuBtn->setPosition(Point(0, 0));
     this->addChild(menuBtn);
     
-    auto toMenu = Label::createWithSystemFont("Zum Menü", "Arial", 24.0);
-    auto toMenuItem = MenuItemLabel::create(toMenu, CC_CALLBACK_1(LevelScene::goToMenu, this));
-    menuItem ->setPosition(Point(size.width / 4, (size.height -50)));
-    
-    auto toMenuBtn = Menu::createWithItem(toMenuItem);
-    toMenuBtn->setPosition(Point(0, 0));
-    this->addChild(toMenuBtn);
-    
     labelTime = Label::createWithTTF(countDown.timer, "fonts/arial.ttf", 24);
     if (labelTime == nullptr)
     {
@@ -117,8 +105,6 @@ bool LevelScene::init()
     }
     
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
-
-
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::playerUpdate));
 
 // Physics-Teil 
@@ -142,7 +128,7 @@ bool LevelScene::init()
     auto framesLeft = getAnimation("Player_0%01d.png", 10, 6);
     
     _player = Player::createWithSpriteFrame(frames.front());
-    _player->setAnchorPoint(Vec2::ZERO);
+    _player->setAnchorPoint(Vec2(0,0));//::ZERO);
     _player->setPosition(Vec2(size.width/2 + origin.x, origin.y+200));
     
     _player->idleAnimation = Animation::createWithSpriteFrames(frame, 1.0f/8);
@@ -193,62 +179,15 @@ bool LevelScene::init()
 	auto contactListener = EventListenerPhysicsContact::create();
 	contactListener->onContactBegin = CC_CALLBACK_1(LevelScene::onContactBegin, this);
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
-    // score
-    score=0;
- 
-   //  int randomX = arc4random() % 600 + 1;
-   //  int randomY = arc4random() % 300 + 1;
+
     _hussi1 = Target::create("res/images/hussi.png");
     _hussi1->_alive = true;
     _hussi1->_lifePoints = 2;
     this->addChild(_hussi1);
     _hussi1->setPosition(200,350);
     //_hussi1->move(size);
-    
-    
-  
-/*  auto myHussi = Sprite::create("res/images/hussi.png");
-    
-    hussiTarget->setPosition(Point(15,400));
-    
-    auto moveBy = MoveBy::create(3, Vec2(412,10));//MoveBy::create(5, Vec2(12,40));
-    auto delay = DelayTime::create(1);
-    auto moveTo = MoveTo::create(3, Vec2(1212,400));
-    auto seq = Sequence::create(moveBy, delay, moveTo, nullptr);
- 
-    auto seqBack =moveBy->reverse();
-    auto scaleBy = ScaleBy::create(1.5f, 1.5f, 1.0f);
-    
-    
-    auto moveBy2 = MoveTo::create(3, Vec2(15,100));//MoveBy::create(5, Vec2(12,40));
-    auto delay2 = DelayTime::create(1);
-    auto moveTo2 = MoveTo::create(3, Vec2(15,100));
-    auto seq2 = Sequence::create(moveBy2, delay2, moveTo2, nullptr);
-    auto rotateTo2 = RotateTo::create(5.0f, 1.0f);
-    
-    myHussi->runAction(seq);
    
-    myHussi->runAction(scaleBy);
-    auto rotateTo = RotateTo::create(1.0f, 5.0f);
-    myHussi->runAction(rotateTo);
- //    myHussi->runAction(seq2);
-    
-    auto myHussi2 = Sprite::create("res/images/hussi.png");
-    // auto spritebody =   PhysicsBody::createCircle(seq->getContentSize().width/2,PhysicsMaterial(0,1,0));
-    myHussi2->setPosition(Point(1215,100));
-    
-/*    myHussi2->runAction(RepeatForever::create(seq2));
-    myHussi2->runAction(scaleBy);
-    myHussi2->runAction(rotateTo2);
-    myHussi2->runAction(seqBack);
-    
-    this->addChild(myHussi2);*/
-    
-    
-    
-    
-   
-       return true;
+    return true;
 }
 
 void LevelScene::update(float dt){
@@ -260,13 +199,6 @@ void LevelScene::playerUpdate(float dt)
 {
     _player->updatePlayer(dt);
    // _player2->updatePlayer(dt);
-   /* ValueMap properties = _tileMap->getProperties();
-    Value collision = properties["Collidable"];
-    if (!collision.isNull()) {
-        CCLOG("COLLISION WITH LAYER");
-    } else {
-        CCLOG("NO COLLISION");
-    }*/
 }
 
 bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
@@ -278,7 +210,7 @@ bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
 	//check for Collision
 	if ((a->getCollisionBitmask() != b->getCollisionBitmask()) || (a->getCollisionBitmask() != c->getCollisionBitmask()) || (b->getCollisionBitmask() != c->getCollisionBitmask()))
     {
-        if (a->getCollisionBitmask()==5 && b->getCollisionBitmask()==4) {
+        if (a->getCollisionBitmask()==5 && b->getCollisionBitmask()==2) {
             CCLOG("collision");
             _hussi1->kill();
         }
@@ -297,9 +229,7 @@ void LevelScene::initKeyboard()
 	keyListener->onKeyReleased = CC_CALLBACK_2(LevelScene::onKeyReleased, this);
     
     _eventDispatcher->addEventListenerWithSceneGraphPriority(keyListener, this);
-
 }
-
 
 void LevelScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event)
 {
@@ -384,11 +314,9 @@ Vector<SpriteFrame*> LevelScene::getAnimation(const char * format, int count, in
         //animFrames.pushBack(spritecache->getSpriteFrameByName(str));
         SpriteFrame* frame = spritecache->getSpriteFrameByName(str);
         animFrames.pushBack(frame);
-        
     }
     return animFrames;
 }
-
 
 void LevelScene::stopMusic(float dt){
     CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("res/audio/beat.mp3");

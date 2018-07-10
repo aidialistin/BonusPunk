@@ -2,7 +2,9 @@
 //	
 // 	Created by Jan Gabriel on 28.06.10.
 //
-
+#ifndef M_PI
+#define M_PI    3.14159265358979323846f
+#endif
 #include "Player.h"
 #include "enums.h"
 #include "LevelScene.hpp"
@@ -63,22 +65,19 @@ void Player::shoot(){
     if (shootAllowed){
         auto bullet = Bullet::create("close24.png");
         bullet->setAnchorPoint(Vec2::ZERO);
-        bullet->setPosition(this->origin.x/2, this->origin.y/2);
+        bullet->setPosition(0,0);//this->origin.x, this->origin.y);
         
-        auto bulletBody = cocos2d::PhysicsBody::createBox( bullet->getContentSize());
-       // bulletBody->addMass(1.0f);
-       // bulletBody->setVelocity(Vec2(100,100));
+        auto bulletBody = cocos2d::PhysicsBody::createBox(bullet->getContentSize());
         bulletBody->setGravityEnable(false);
         
-        bullet->setPhysicsBody( bulletBody );
+        bullet->setPhysicsBody(bulletBody );
         bulletBody-> setRotationEnable(false);
         
         // Für Collision
-        bulletBody->setCollisionBitmask(4);
+        bulletBody->setCollisionBitmask(2); //4
         bulletBody->setContactTestBitmask(true);
         
         this->addChild(bullet, 0);
-        //auto moveTo = cocos2d::MoveTo::create(1.0f, _target);
         auto moveBy = cocos2d::MoveBy::create(1.0f, _target);
         auto delay = cocos2d::DelayTime::create( 0.1f );
         auto b = bullet;
@@ -92,11 +91,19 @@ void Player::shoot(){
 void Player::onMouseMove(cocos2d::Event *event)
 {
     cocos2d::EventMouse* e = (cocos2d::EventMouse*)event;
-   // auto mousePos = cocos2d::Vec2(e->getCursorX(), e->getCursorY());
-   // auto playerPos = cocos2d::Vec2(origin.x, origin.y);
+    auto mouseX = e->getLocation().x;
+    auto mouseY = 640 - e->getLocation().y;
+    auto vec = Vec2(mouseX, mouseY)-this->getPosition();//e->getLocation() - this->getPosition();
     
-     _target = ccpSub(e->getLocation(), this->getPosition());
-    
+   // CCLOG("x: %f y: %f", mouseX, mouseY);
+    auto distance = 500;
+    auto shootAngle = vec.getAngle();
+   // auto degrees = CC_RADIANS_TO_DEGREES(shootAngle);
+    //CCLOG("%f", degrees);
+    float x1 = distance * (cos(shootAngle));
+    float y1 = distance * (sin(shootAngle));
+
+    _target = Vec2(x1, y1);
 }
 
 void Player::playAnimation(){
