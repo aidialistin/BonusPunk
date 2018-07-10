@@ -34,6 +34,7 @@ public:
     virtual bool init() override;
     Vector<SpriteFrame*> getAnimation(const char *format, int count, int i);
     void startGame();
+    void stopMusic(float dt);
 
 private:
     CCTMXTiledMap *_tileMap;
@@ -50,7 +51,7 @@ private:
 
 	void SetPhysicsWorld( cocos2d::PhysicsWorld *world) { sceneWorld = world; };
 	bool onContactBegin(cocos2d::PhysicsContact &contact);
-    
+    unsigned int score;
 
 };
 
