@@ -12,6 +12,7 @@
 
 #include "HelloWorldScene.h"
 #include <string>
+#include "Target.hpp"
 using namespace std;
 USING_NS_CC;
 
@@ -197,11 +198,19 @@ bool LevelScene::init()
  
    //  int randomX = arc4random() % 600 + 1;
    //  int randomY = arc4random() % 300 + 1;
+    _hussi1 = Target::create("res/images/hussi.png");
+    _hussi1->_alive = true;
+    _hussi1->_lifePoints = 2;
+    this->addChild(_hussi1);
+    _hussi1->setPosition(200,350);
+    //_hussi1->move(size);
     
-    auto myHussi = Sprite::create("res/images/hussi.png");
-    auto spritebody = PhysicsBody::createCircle(myHussi->getContentSize().width/2,PhysicsMaterial(0,1,0));
-    myHussi->setPhysicsBody(spritebody);
-    myHussi->setPosition(Point(15,400));
+    
+  
+/*  auto myHussi = Sprite::create("res/images/hussi.png");
+    
+    hussiTarget->setPosition(Point(15,400));
+    
     auto moveBy = MoveBy::create(3, Vec2(412,10));//MoveBy::create(5, Vec2(12,40));
     auto delay = DelayTime::create(1);
     auto moveTo = MoveTo::create(3, Vec2(1212,400));
@@ -209,6 +218,7 @@ bool LevelScene::init()
  
     auto seqBack =moveBy->reverse();
     auto scaleBy = ScaleBy::create(1.5f, 1.5f, 1.0f);
+    
     
     auto moveBy2 = MoveTo::create(3, Vec2(15,100));//MoveBy::create(5, Vec2(12,40));
     auto delay2 = DelayTime::create(1);
@@ -221,20 +231,20 @@ bool LevelScene::init()
     myHussi->runAction(scaleBy);
     auto rotateTo = RotateTo::create(1.0f, 5.0f);
     myHussi->runAction(rotateTo);
-     myHussi->runAction(seq2);
+ //    myHussi->runAction(seq2);
     
     auto myHussi2 = Sprite::create("res/images/hussi.png");
     // auto spritebody =   PhysicsBody::createCircle(seq->getContentSize().width/2,PhysicsMaterial(0,1,0));
     myHussi2->setPosition(Point(1215,100));
     
-    myHussi2->runAction(RepeatForever::create(seq2));
+/*    myHussi2->runAction(RepeatForever::create(seq2));
     myHussi2->runAction(scaleBy);
     myHussi2->runAction(rotateTo2);
     myHussi2->runAction(seqBack);
     
-    this->addChild(myHussi2);
+    this->addChild(myHussi2);*/
     
-    this->addChild(myHussi);
+    
     
     
    
@@ -266,9 +276,12 @@ bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
     PhysicsBody *c = contact.getShapeB()->getBody();
 
 	//check for Collision
-	//if ((1 == a->getCollisionBitmask() && 2 == b->getCollisionBitmask() ) || (2 == a->getCollisionBitmask() && 1 == b->getCollisionBitmask() ) )
 	if ((a->getCollisionBitmask() != b->getCollisionBitmask()) || (a->getCollisionBitmask() != c->getCollisionBitmask()) || (b->getCollisionBitmask() != c->getCollisionBitmask()))
     {
+        if (a->getCollisionBitmask()==5 && b->getCollisionBitmask()==4) {
+            CCLOG("collision");
+            _hussi1->kill();
+        }
         return true;
 	}
 	else {

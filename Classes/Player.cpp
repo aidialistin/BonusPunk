@@ -74,7 +74,7 @@ void Player::shoot(){
         bulletBody-> setRotationEnable(false);
         
         // Für Collision
-        bulletBody->setCollisionBitmask(2);
+        bulletBody->setCollisionBitmask(4);
         bulletBody->setContactTestBitmask(true);
         
         this->addChild(bullet, 0);
