@@ -59,7 +59,7 @@ bool HelloWorld::init()
 
 
     CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/doorbell.mp3");
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/doorbell.mp3",true);//true loops
+    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/doorbell.mp3",false);//true loops
     
 
     auto visibleSize = Director::getInstance()->getVisibleSize();
