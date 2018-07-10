@@ -14,7 +14,7 @@ using namespace cocos2d;
 class Target : public cocos2d::Sprite
 {
 public:
-    int lifePoints;
+    int _lifePoints;
     static Target* create(const std::string& filename);
     bool _alive;
     void move(Size windowsize);

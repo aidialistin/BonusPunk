@@ -52,5 +52,9 @@ void Target::move(Size windowsize)
 
 void Target::kill()
 {
-    lifePoints -= 1;
+    _lifePoints -= 1;
+    //Animation + Sound
+    if(_lifePoints==0){
+        this->removeFromParent();
+    }
 }

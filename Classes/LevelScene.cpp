@@ -201,6 +201,7 @@ bool LevelScene::init()
    //  int randomY = arc4random() % 300 + 1;
     _hussi1 = Target::create("res/images/hussi.png");
     _hussi1->_alive = true;
+    _hussi1->_lifePoints = 2;
     this->addChild(_hussi1);
     _hussi1->setPosition(200,350);
     //_hussi1->move(size);
@@ -282,9 +283,7 @@ bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
     {
         if (a->getCollisionBitmask()==5 && b->getCollisionBitmask()==4) {
             CCLOG("collision");
-            _hussi1->_alive = false;
-            _hussi1->removeFromParent();
-            
+            _hussi1->kill();
         }
         return true;
 	}
