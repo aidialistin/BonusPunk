@@ -97,8 +97,6 @@ void Player::onMouseMove(cocos2d::Event *event)
     
      _target = ccpSub(e->getLocation(), this->getPosition());
     
-    
-    
 }
 
 void Player::playAnimation(){
