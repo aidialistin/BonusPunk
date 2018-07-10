@@ -15,6 +15,7 @@
 #include "CountDown.hpp"
 #include "enums.h"
 #include "Player.h"
+#include "Target.hpp"
 
 using namespace cocos2d;
 USING_NS_CC;
@@ -41,6 +42,9 @@ private:
     CCTMXLayer *_background;
 	Player* _player;
     Player* _player2;
+    Target* _hussi1;
+    Target* _hussi2;
+    Target* _hussi3;
 	void initKeyboard();
     void onMouseMove(cocos2d::Event *event);
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);
