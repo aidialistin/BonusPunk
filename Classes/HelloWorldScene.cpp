@@ -23,14 +23,15 @@
  ****************************************************************************/
 
 #include "HelloWorldScene.h"
-#include "SimpleAudioEngine.h"
 #include "CountDown.hpp"
 #include "LevelScene.hpp"
 #include <vector>
-#include "SimpleAudioEngine.h"
+#include "audio/include/AudioEngine.h" USING_NS_CC;
+
 #include <string>
 using namespace std;
 using namespace cocos2d;
+using namespace experimental;
 
 USING_NS_CC;
 
@@ -56,37 +57,14 @@ bool HelloWorld::init()
     }
     auto bGColor = cocos2d::LayerColor::create(Color4B(53, 103, 183, 255));
     this->addChild(bGColor);
-
-
-    CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/doorbell.mp3");
-    CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/doorbell.mp3",false);//true loops
+    auto audioFile = "res/audio/bonuspunkte.m4a";
+    auto audioId = AudioEngine::play2d(audioFile);
+    AudioEngine::setLoop(audioId, true);
+    AudioEngine::setVolume(audioId, 0.2);
+  
     
-
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-    /*SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player_plist.plist");
-   
-    auto background = Sprite::createWithSpriteFrameName("res/images/testbackground.png");
-    background->setPosition(origin.x + 200,origin.y + 200/2);
-    this->addChild(background);
-    //Vector<SpriteFrame*>  frames = getAnimation("res/images/Layer 1_sprite_%01d.png", 8);
-    auto frames = getAnimation("Layer 1_sprite_0%01d.png", 8);
-    auto sprite = Sprite::createWithSpriteFrame(frames.front());
-    this->addChild(sprite);
-    sprite->setPosition(100,620);
-    
-    auto animation = Animation::createWithSpriteFrames(frames, 1.0f/8);
-    sprite->runAction(RepeatForever::create(Animate::create(animation)));
-
-
-    mySprite = Sprite::create("res/images/player_plist.png");
-    
-    mySprite->setPosition(Point((visibleSize.width/2) + origin.x, (visibleSize.height/2) + origin.y));
-    auto action=MoveBy::create(3,Point(100,10));
-    mySprite->runAction(EaseBounceIn::create(action));
-    this->addChild(mySprite); */
-    
 
     auto start = Label::createWithSystemFont("Start", "Arial", 30.0);
     auto level1 = Label::createWithSystemFont("Level1", "Arial", 20.0);
@@ -175,35 +153,11 @@ void HelloWorld::levelAdd(cocos2d::Ref *pSender)
 }
 
 void HelloWorld::levelEins(cocos2d::Ref *pSender)
-{
+{ AudioEngine::pauseAll();
     //auto scene = Scene::create();
     auto scene = LevelScene::createScene(1);
     Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
 }
-
-
-
-    // add "HelloWorld" splash screen"
-/*    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }*/
-
-    //this->schedule(SEL_SCHEDULE(&CountDown::update), 1.0f);
- //   this->schedule(CC_SCHEDULE_SELECTOR(HelloWorld::update), 1.0f);
-   // return true;
-
-//}
-
 
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
@@ -215,10 +169,6 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
     exit(0);
 #endif
 
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() and exit(0) as given above,instead trigger a custom event created in RootViewController.mm as below*/
-
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
 
 
 }

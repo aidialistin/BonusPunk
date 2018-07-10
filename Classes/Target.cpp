@@ -6,6 +6,9 @@
 //
 
 #include "Target.hpp"
+#include "audio/include/AudioEngine.h" USING_NS_CC;
+using namespace experimental;
+
 using namespace cocos2d;
 
 Target* Target::create(const std::string& filename)
@@ -53,7 +56,16 @@ void Target::move(Size windowsize)
 void Target::kill()
 {
     _lifePoints -= 1;
-    //Animation + Sound
+  auto audioFile = "res/audio/explosion.m4a";
+     auto audioId = AudioEngine::play2d(audioFile);
+    AudioEngine::setLoop(audioId, false);
+ /*     //Animation + Sound
+    CCLOG("weiss");
+     CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic("res/audio/level1.m4a");
+    CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect("res/audio/explosion.m4a");
+    CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("res/audio/explosion.m4a",false);//true loops
+ 
+     CCLOG("du was");*/
     if(_lifePoints==0){
         this->removeFromParent();
     }

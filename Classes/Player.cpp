@@ -94,7 +94,6 @@ void Player::onMouseMove(cocos2d::Event *event)
     auto mouseX = e->getLocation().x;
     auto mouseY = 640 - e->getLocation().y;
     auto vec = Vec2(mouseX, mouseY)-this->getPosition();//e->getLocation() - this->getPosition();
-    
    // CCLOG("x: %f y: %f", mouseX, mouseY);
     auto distance = 500;
     auto shootAngle = vec.getAngle();

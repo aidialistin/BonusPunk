@@ -15,6 +15,8 @@
 #include "Target.hpp"
 using namespace std;
 USING_NS_CC;
+#include "audio/include/AudioEngine.h" USING_NS_CC;
+using namespace experimental;
 
 
 int i;
@@ -65,14 +67,17 @@ bool LevelScene::init()
     
     if (i == 1) {
         background = Sprite::create("res/images/background_1.png");
-        CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/level1.m4a");
-        CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/level1.m4a",true);//true loops
-        this->schedule(schedule_selector(LevelScene::stopMusic), 1);// seconds after to stop
-
+        auto audioFile = "res/audio/level1.m4a";
+        auto audioId = AudioEngine::play2d(audioFile);
+        AudioEngine::setLoop(audioId, true);
+        AudioEngine::setVolume(audioId, 0.1);
+       
     } else if (i == 2){
         background = Sprite::create("res/images/background_2.jpg");
-        CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic("res/audio/lachen.m4a");
-        CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic("res/audio/lachen.m4a",true);//true loops
+        auto audioFile = "res/audio/BoulderDash.mp3";
+        auto audioId = AudioEngine::play2d(audioFile);
+        AudioEngine::setLoop(audioId, true);
+        AudioEngine::setVolume(audioId, 0.1);
         
     } else if (i == 3) {
         background = Sprite::create("res/images/background_3.jpg");
@@ -302,6 +307,7 @@ void LevelScene::goToMenu(cocos2d::Ref *pSender)
 {
     auto scene = HelloWorld::createScene();
     Director::getInstance()->replaceScene(TransitionCrossFade::create(0.5, scene));
+    AudioEngine::pauseAll();
 }
 
 Vector<SpriteFrame*> LevelScene::getAnimation(const char * format, int count, int i)
