@@ -38,13 +38,16 @@ public:
     void stopMusic(float dt);
 
 private:
-    CCTMXTiledMap *_tileMap;
-    CCTMXLayer *_background;
+
+    Sprite* background;
 	Player* _player;
     Player* _player2;
     Target* _hussi1;
     Target* _hussi2;
     Target* _hussi3;
+    void level_1();
+    void level_2();
+    void level_3();
 	void initKeyboard();
     void onMouseMove(cocos2d::Event *event);
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode key, cocos2d::Event* event);

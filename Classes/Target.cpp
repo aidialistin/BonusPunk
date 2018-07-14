@@ -35,22 +35,23 @@ void Target::move(Size windowsize)
     auto x = this->getPosition().x;
     auto y = this->getPosition().y;
     
-    if(x<windowsize.width){
-        CCLOG("GEHE REIN");
-        x=x+1280;
-        auto delay = DelayTime::create(3);
-        auto moveTo = MoveTo::create(3, Vec2(x,y));
-        auto rotateTo2 = RotateTo::create(5.0f, 1.0f);
-        auto scaleBy = ScaleBy::create(1.5f, 1.5f, 1.0f);
-        auto seq = Sequence::create(moveTo, delay, nullptr);
-        runAction(seq);
-    } else {
-        x=0;
-        auto delay = DelayTime::create(3);
-        auto moveTo = MoveTo::create(3, Vec2(x,y));
-        auto seq = Sequence::create(moveTo, delay, nullptr);
-        runAction(seq);
-    }
+    //while(this->_alive){
+        if(x<windowsize.width){
+            x=x+1280;
+            auto delay = DelayTime::create(3);
+            auto moveTo = MoveTo::create(3, Vec2(x,y));
+            auto rotateTo2 = RotateTo::create(5.0f, 1.0f);
+            auto scaleBy = ScaleBy::create(1.5f, 1.5f, 1.0f);
+            auto seq = Sequence::create(moveTo, delay, nullptr);
+            runAction(seq);
+        } else {
+            x=0;
+            auto delay = DelayTime::create(3);
+            auto moveTo = MoveTo::create(3, Vec2(x,y));
+            auto seq = Sequence::create(moveTo, delay, nullptr);
+            runAction(seq);
+        }
+   // }
 }
 
 void Target::kill()

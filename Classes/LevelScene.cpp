@@ -43,12 +43,9 @@ Scene* LevelScene::createScene(int level) {
     auto scene = Scene::createWithPhysics();
     scene->getPhysicsWorld()->setGravity(Vec2(0, -900));
 	scene->getPhysicsWorld()->setDebugDrawMask(PhysicsWorld::DEBUGDRAW_ALL);
-    
     auto layer = LevelScene::create();
 	layer->SetPhysicsWorld( scene->getPhysicsWorld() );
-    
     scene->addChild(layer);
-    
     return scene;
 }
 
@@ -61,26 +58,15 @@ bool LevelScene::init()
     
     CountDown countDown = *new CountDown();
     auto size = Director::getInstance()->getWinSize();
-    auto background = Sprite::create("");
+   // auto background = Sprite::create("");
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
-    
     if (i == 1) {
-        background = Sprite::create("res/images/background_1.png");
-        auto audioFile = "res/audio/level1.m4a";
-        auto audioId = AudioEngine::play2d(audioFile);
-        AudioEngine::setLoop(audioId, true);
-        AudioEngine::setVolume(audioId, 0.1);
-       
+        LevelScene::level_1();
     } else if (i == 2){
-        background = Sprite::create("res/images/background_2.jpg");
-        auto audioFile = "res/audio/BoulderDash.mp3";
-        auto audioId = AudioEngine::play2d(audioFile);
-        AudioEngine::setLoop(audioId, true);
-        AudioEngine::setVolume(audioId, 0.1);
-        
+        LevelScene::level_2();
     } else if (i == 3) {
-        background = Sprite::create("res/images/background_3.jpg");
+        LevelScene::level_3();
     }
     
     background->setScale(size.width / background->getContentSize().width, size.height / background->getContentSize().height);
@@ -112,8 +98,8 @@ bool LevelScene::init()
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::update), 1.0f);
     this->schedule(CC_SCHEDULE_SELECTOR(LevelScene::playerUpdate));
 
-// Physics-Teil 
-//	Ränder
+    // Physics-Teil
+    //	Ränder
 	auto edgeBody = PhysicsBody::createEdgeBox( size, PHYSICSBODY_MATERIAL_DEFAULT, 3);
 	//	Für Collision
 	edgeBody->setCollisionBitmask(1);
@@ -124,8 +110,7 @@ bool LevelScene::init()
 	edgeNode->setPhysicsBody( edgeBody );
 	this->addChild( edgeNode );
 
-//	Player
-    
+    //	Player
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/images/player_plist.plist");
     auto frames = getAnimation("Player_0%01d.png", 12, 1);
     auto frame = getAnimation("Player_0%01d.png", 1, 1);
@@ -153,32 +138,31 @@ bool LevelScene::init()
     _player->runAction(_player->rightAnim);
     _player->runAction(_player->idleAnim);
 
-    
+    this->addChild(_player, 0);
    // _player->playAnimation(_player->walkRightAnimation);
    // _player->playAnimation(_player->idleAnimation);
-    this->addChild(_player, 0);
     
-   // _player2 = Player::createWithSpriteFrame(frames.front());
-   // _player2->setAnchorPoint(Vec2::ZERO);
-   // _player2->setPosition(Vec2(20, origin.y));
+    _player2 = Player::createWithSpriteFrame(frames.front());
+    _player2->setAnchorPoint(Vec2::ZERO);
+    _player2->setPosition(Vec2(20, origin.y));
    
 	auto spriteRectBody = PhysicsBody::createBox(_player->getContentSize(), PhysicsMaterial( 0, 1, 0));
     spriteRectBody-> setRotationEnable(false);
-   // auto spriteRectBody2 = PhysicsBody::createBox(_player2->getContentSize(), PhysicsMaterial( 0, 1, 0));
-   // spriteRectBody2-> setRotationEnable(false);
+    auto spriteRectBody2 = PhysicsBody::createBox(_player2->getContentSize(), PhysicsMaterial( 0, 1, 0));
+    spriteRectBody2-> setRotationEnable(false);
 	_player->setPhysicsBody( spriteRectBody );
-    //_player2->setPhysicsBody( spriteRectBody2 );
+    _player2->setPhysicsBody( spriteRectBody2 );
    
 	// Für Collision
 	spriteRectBody->setCollisionBitmask(2);
 	spriteRectBody->setContactTestBitmask(true);
-   // spriteRectBody->setCategoryBitmask(0);
-  //  spriteRectBody2->setCollisionBitmask(3);
-    //spriteRectBody2->setContactTestBitmask(true);
-    //spriteRectBody2->setCategoryBitmask(1);
+    //spriteRectBody->setCategoryBitmask(0);
+    spriteRectBody2->setCollisionBitmask(3);
+    spriteRectBody2->setContactTestBitmask(true);
+    spriteRectBody2->setCategoryBitmask(1);
 
-	//this->addChild(_player, 0);
-  //  this->addChild(_player2, 0);
+    
+    this->addChild(_player2, 0);
 	this->initKeyboard();
 
 	auto contactListener = EventListenerPhysicsContact::create();
@@ -225,6 +209,29 @@ bool LevelScene::onContactBegin(cocos2d::PhysicsContact &contact)
 		return false;
 	}
     
+}
+
+void LevelScene::level_1()
+{
+    LevelScene::background = Sprite::create("res/images/background_1.png");
+    auto audioFile = "res/audio/level1.m4a";
+    auto audioId = AudioEngine::play2d(audioFile);
+    AudioEngine::setLoop(audioId, true);
+    AudioEngine::setVolume(audioId, 0.1);
+}
+
+void LevelScene::level_2()
+{
+    background = Sprite::create("res/images/background_2.jpg");
+    auto audioFile = "res/audio/BoulderDash.mp3";
+    auto audioId = AudioEngine::play2d(audioFile);
+    AudioEngine::setLoop(audioId, true);
+    AudioEngine::setVolume(audioId, 0.1);
+}
+
+void LevelScene::level_3()
+{
+    background = Sprite::create("res/images/background_3.jpg");
 }
 
 void LevelScene::initKeyboard()
